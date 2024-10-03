@@ -96,7 +96,7 @@ export const CTAs = groq`
   },`;
 
 // Get Site info such as Header and Footer.
-  export const SITE_QUERY = groq`*[_type == "site"][0] {
+export const SITE_QUERY = groq`*[_type == "site"][0] {
     ...,${HEADER_SECTION}}`;
 // Gets Page based on current slug.
 export const PAGE_QUERY = groq`*[_type == "page" && pathname.current == $pathname][0]{

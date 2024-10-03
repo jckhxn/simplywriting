@@ -7,6 +7,7 @@ export default function Button({
   style,
   className,
   children,
+  // @ts-ignore
 }: Sanity.CTA & React.HTMLAttributes<HTMLAnchorElement>) {
   if (!link?.type) return null;
   const props = {

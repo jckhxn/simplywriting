@@ -1,0 +1,11 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Fixes CSS issue in OG-Image plugin in Presentation mode */
+* {
+isolation: isolate;
+}
+

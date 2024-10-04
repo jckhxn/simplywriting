@@ -20,6 +20,12 @@ export default function Services() {
               a way that resonates.
             </p>
           </div>
+          <Button
+            variant="outline"
+            className="mt-4 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white"
+          >
+            Learn More
+          </Button>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -48,12 +54,6 @@ export default function Services() {
                 {service.title}
               </h3>
               <p className="text-indigo-700">{service.description}</p>
-              <Button
-                variant="outline"
-                className="mt-4 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white"
-              >
-                Learn More
-              </Button>
             </div>
           ))}
         </div>

@@ -39,101 +39,115 @@ export function contactForm() {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const result = await submitContactForm(form);
-
     // Handle form submission result here (e.g., update statusMessage or errors)
   };
 
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50">
-      <Card className="mx-auto max-w-md bg-white shadow-lg rounded-lg p-6">
-        <CardHeader>
-          <CardTitle className="text-indigo-900">Contact Us</CardTitle>
-          <CardDescription className="text-indigo-700">
-            Fill out the form below, and we'll get back to you as soon as
-            possible.
+      <Card className="mx-auto max-w-lg bg-white shadow-xl rounded-2xl overflow-hidden">
+        <div className="bg-gradient-to-r from-purple-300 to-indigo-400 h-2" />
+        <CardHeader className="p-6">
+          <CardTitle className="text-3xl font-bold text-indigo-800">
+            Get in Touch
+          </CardTitle>
+          <CardDescription className="text-indigo-600 mt-2">
+            We'd love to hear from you. Fill out the form below and we'll get
+            back to you shortly.
           </CardDescription>
           {statusMessage && (
-            <p className="text-center text-green-600 mt-4">{statusMessage}</p>
+            <p className="text-center text-purple-500 mt-4 font-semibold">
+              {statusMessage}
+            </p>
           )}
         </CardHeader>
-        <CardContent>
-          <form className="space-y-4" onSubmit={onSubmit}>
-            <div className="grid grid-cols-2 gap-4">
+        <CardContent className="p-6">
+          <form className="space-y-6" onSubmit={onSubmit}>
+            <div className="grid grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="first-name" className="text-indigo-700">
+                <Label
+                  htmlFor="first-name"
+                  className="text-indigo-600 font-medium"
+                >
                   First Name
                 </Label>
                 <Input
                   id="first-name"
                   name="firstName"
-                  placeholder="Enter your first name"
+                  placeholder="John"
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  className="border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="border-indigo-300 focus:ring-purple-400 focus:border-purple-400 rounded-lg"
                 />
                 {errors.firstName && (
-                  <p className="text-red-500 text-sm">{errors.firstName[0]}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.firstName[0]}
+                  </p>
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="last-name" className="text-indigo-700">
+                <Label
+                  htmlFor="last-name"
+                  className="text-indigo-600 font-medium"
+                >
                   Last Name
                 </Label>
                 <Input
                   id="last-name"
                   name="lastName"
-                  placeholder="Enter your last name"
+                  placeholder="Doe"
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  className="border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="border-indigo-300 focus:ring-purple-400 focus:border-purple-400 rounded-lg"
                 />
                 {errors.lastName && (
-                  <p className="text-red-500 text-sm">{errors.lastName[0]}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.lastName[0]}
+                  </p>
                 )}
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-indigo-700">
-                Email
+              <Label htmlFor="email" className="text-indigo-600 font-medium">
+                Email Address
               </Label>
               <Input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="johndoe@example.com"
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500"
+                className="border-indigo-300 focus:ring-purple-400 focus:border-purple-400 rounded-lg"
               />
               {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email[0]}</p>
+                <p className="text-red-500 text-sm mt-1">{errors.email[0]}</p>
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="message" className="text-indigo-700">
-                Message
+              <Label htmlFor="message" className="text-indigo-600 font-medium">
+                Your Message
               </Label>
               <Textarea
                 id="message"
                 name="message"
-                placeholder="Enter your message"
-                className="min-h-[100px] border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Tell us what's on your mind..."
+                className="min-h-[120px] border-indigo-300 focus:ring-purple-400 focus:border-purple-400 rounded-lg"
                 value={formData.message}
                 onChange={handleChange}
                 required
               />
               {errors.message && (
-                <p className="text-red-500 text-sm">{errors.message[0]}</p>
+                <p className="text-red-500 text-sm mt-1">{errors.message[0]}</p>
               )}
             </div>
             <Button
               type="submit"
-              className="w-full border-indigo-600 text-whte-600 hover:bg-indigo-600 hover:text-white"
+              className="w-full bg-stone-700 text-gray-200 font-semibold py-3 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 hover:bg-stone-500"
             >
-              Submit
+              Send Message
             </Button>
           </form>
         </CardContent>

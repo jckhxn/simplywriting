@@ -39,6 +39,8 @@ export function contactForm() {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const result = await submitContactForm(form);
+
+    // Handle form submission result here (e.g., update statusMessage or errors)
   };
 
   return (
@@ -129,7 +131,7 @@ export function contactForm() {
             </div>
             <Button
               type="submit"
-              className="w-full border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white"
+              className="w-full border-indigo-600 text-whte-600 hover:bg-indigo-600 hover:text-white"
             >
               Submit
             </Button>

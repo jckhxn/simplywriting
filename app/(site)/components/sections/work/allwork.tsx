@@ -21,16 +21,14 @@ export default async function WritingWorkPage({
   category: string;
 }) {
   const currentPage = page || 1;
-  const selectedCategory = category || ""; // Sanitize category
+  const selectedCategory = category || "";
 
-  // Fetch works based on the current page and category
   const worksData = await loadWorks(
     currentPage,
     ITEMS_PER_PAGE,
     selectedCategory
   );
 
-  // Safely destructure the worksData with optional chaining and default values
   const {
     posts = [],
     total = 0,
@@ -39,7 +37,6 @@ export default async function WritingWorkPage({
 
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
 
-  // Ensure "All" is the first category and append fetched categories
   const categories = [
     "All",
     ...(fetchedCategories
@@ -48,47 +45,59 @@ export default async function WritingWorkPage({
   ];
 
   return (
-    <div className="bg-background text-foreground min-h-screen">
-      <main className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold mb-8 text-center">
-          Explore Our Writing
-        </h1>
-
-        {/* Category Links */}
-        <div className="mb-10 flex flex-wrap justify-center gap-2">
-          {categories.map((category) => (
-            <Link
-              key={category}
-              href={`?category=${category === "All" ? "" : sanitizeString(category)}&page=1`}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                selectedCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-              }`}
-            >
-              {category}
-            </Link>
-          ))}
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-900">
+      <main className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mb-16 text-center">
+          <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+            Explore Our <span className="text-primary">Writing</span>
+          </h1>
+          <p className="mx-auto max-w-2xl text-xl text-gray-600">
+            Discover insightful articles, thought-provoking essays, and expert
+            analyses on various topics.
+          </p>
         </div>
 
-        {/* Post Listings */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <nav
+          className="mb-12 flex flex-wrap justify-center gap-3"
+          aria-label="Categories"
+        >
+          {categories.map((cat) => {
+            const isSelected =
+              selectedCategory === (cat === "All" ? "" : sanitizeString(cat));
+            return (
+              <Link
+                key={cat}
+                href={`?category=${cat === "All" ? "" : sanitizeString(cat)}&page=1`}
+                className={`rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ${
+                  isSelected
+                    ? "bg-primary text-white shadow-lg scale-105"
+                    : "bg-white text-gray-700 hover:bg-gray-100 hover:shadow"
+                }`}
+                aria-current={isSelected ? "page" : undefined}
+              >
+                {cat}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <div
+            <article
               key={post?._id}
-              className="bg-card rounded-lg overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-xl"
+              className="overflow-hidden rounded-lg bg-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             >
               <Link
                 href={`/writing/${post?.slug}`}
                 prefetch={false}
-                className="block"
+                className="block overflow-hidden"
               >
                 <img
                   src={post?.image || "/placeholder.svg"}
                   alt={post?.title || "Untitled"}
                   width={400}
                   height={225}
-                  className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                  className="h-48 w-full object-cover transition-transform duration-300 hover:scale-110"
                 />
               </Link>
               <div className="p-6">
@@ -97,20 +106,20 @@ export default async function WritingWorkPage({
                   prefetch={false}
                   className="block"
                 >
-                  <h2 className="text-2xl font-bold mb-3 hover:text-primary transition-colors duration-300">
+                  <h2 className="mb-3 text-2xl font-bold text-gray-900 transition-colors duration-300 hover:text-primary">
                     {post?.title || "Untitled"}
                   </h2>
                 </Link>
-                <p className="text-muted-foreground line-clamp-3 mb-4">
+                <p className="mb-4 line-clamp-3 text-gray-600">
                   {post?.excerpt ?? ""}
                 </p>
-                <div className="flex items-center text-sm text-muted-foreground">
-                  <Avatar className="w-8 h-8 mr-3">
+                <div className="flex items-center text-sm text-gray-500">
+                  <Avatar className="mr-3 h-10 w-10 border-2 border-primary/20">
                     <AvatarImage
                       src={post?.author?.image || "/placeholder-user.jpg"}
                       alt={post?.author?.name || "Author"}
                     />
-                    <AvatarFallback>
+                    <AvatarFallback className="bg-primary/10 text-primary">
                       {post?.author?.name
                         ?.split(" ")
                         .map((n) => n[0])
@@ -118,7 +127,7 @@ export default async function WritingWorkPage({
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <span className="font-medium">
+                    <span className="font-medium text-gray-900">
                       {post?.author?.name || "Author"}
                     </span>
                     <span className="block text-xs">
@@ -127,13 +136,12 @@ export default async function WritingWorkPage({
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
-        {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-12">
+          <nav className="mt-16" aria-label="Pagination">
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
@@ -143,14 +151,20 @@ export default async function WritingWorkPage({
                         ? `?category=${selectedCategory}&page=${currentPage - 1}`
                         : undefined
                     }
-                    disabled={currentPage <= 1}
+                    className={`transition-all duration-300 ${currentPage <= 1 ? "cursor-not-allowed opacity-50" : "hover:bg-gray-100"}`}
+                    aria-disabled={currentPage <= 1}
                   />
                 </PaginationItem>
                 {[...Array(totalPages)].map((_, i) => (
                   <PaginationItem key={i}>
                     <PaginationLink
                       href={`?category=${selectedCategory}&page=${i + 1}`}
-                      isActive={currentPage === i + 1}
+                      className={`transition-all duration-300 ${
+                        currentPage === i + 1
+                          ? "bg-primary text-white"
+                          : "bg-white text-gray-700 hover:bg-gray-100"
+                      }`}
+                      aria-current={currentPage === i + 1 ? "page" : undefined}
                     >
                       {i + 1}
                     </PaginationLink>
@@ -163,12 +177,13 @@ export default async function WritingWorkPage({
                         ? `?category=${selectedCategory}&page=${currentPage + 1}`
                         : undefined
                     }
-                    disabled={currentPage >= totalPages}
+                    className={`transition-all duration-300 ${currentPage >= totalPages ? "cursor-not-allowed opacity-50" : "hover:bg-gray-100"}`}
+                    aria-disabled={currentPage >= totalPages}
                   />
                 </PaginationItem>
               </PaginationContent>
             </Pagination>
-          </div>
+          </nav>
         )}
       </main>
     </div>

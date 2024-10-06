@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/navigation-menu";
 // Sanity Link button
 import Button from "@/app/(site)/components/Button";
-import { Button as shadcnButton } from "@/components/ui/button";
+import { Button as ShadcnButton } from "@/components/ui/button";
+
 type NavProps = {
   name?: string;
   ctas?: any;
@@ -42,15 +43,14 @@ export function navbar2({ name = "B·", ctas, links }: NavProps) {
                 {links.map((link: any, index: number) => (
                   <NavigationMenuLink asChild key={index}>
                     <Button
-                      className="text-[18px] hover:text-gray-600 transition-colors"
+                      className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
                       {...link}
-                      key={index}
                     />
                   </NavigationMenuLink>
                 ))}
                 {ctas.map((cta: any, index: number) => (
                   <Button
-                    className="h-10 px-4 py-2 rounded-md text-[18px] bg-black text-white hover:bg-gray-800"
+                    className="h-10 px-4 py-2 rounded-md text-[18px] bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 transition-colors"
                     {...cta}
                     key={index}
                   />
@@ -61,9 +61,7 @@ export function navbar2({ name = "B·", ctas, links }: NavProps) {
 
           {/* Mobile Menu - Hamburger Icon */}
           <div className="md:hidden">
-            {/* Hacky as hell but I am LAZY */}
-            {/* @ts-ignore */}
-            <shadcnButton
+            <ShadcnButton
               variant="ghost"
               size="icon"
               onClick={toggleMobileMenu}
@@ -83,7 +81,7 @@ export function navbar2({ name = "B·", ctas, links }: NavProps) {
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <line x1="3" y1="18" x2="21" y2="18" />
               </svg>
-            </shadcnButton>
+            </ShadcnButton>
           </div>
         </div>
 
@@ -95,9 +93,9 @@ export function navbar2({ name = "B·", ctas, links }: NavProps) {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/"
-                    className="text-[18px] hover:text-gray-600 transition-colors"
+                    className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
                     prefetch={false}
-                    onClick={() => setIsMobileMenuOpen(false)} // Close menu on link click
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Home
                   </Link>
@@ -105,7 +103,7 @@ export function navbar2({ name = "B·", ctas, links }: NavProps) {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/work"
-                    className="text-[18px] hover:text-gray-600 transition-colors"
+                    className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
                     prefetch={false}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -115,7 +113,7 @@ export function navbar2({ name = "B·", ctas, links }: NavProps) {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/testimonials"
-                    className="text-[18px] hover:text-gray-600 transition-colors"
+                    className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
                     prefetch={false}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -125,7 +123,7 @@ export function navbar2({ name = "B·", ctas, links }: NavProps) {
                 <NavigationMenuLink asChild>
                   <Link
                     href="/contact"
-                    className="text-[18px] hover:text-gray-600 transition-colors"
+                    className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
                     prefetch={false}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

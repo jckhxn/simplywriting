@@ -7,15 +7,21 @@ import TestimonialSection from "./testimonial/testimonial";
 import AboutSection from "./about/about";
 import AllPosts from "./blog/posts";
 import { contactForm } from "./contact/contact-form";
+import WorkExamples from "./work/examples";
+import SocialProof from "./socialproof/socialproof";
+import Benefits from "./benefits/benefits";
 export const sections = {
   "section.aboutme": AboutSection,
   "section.animatedhero": AnimatedHero,
   "section.scrollablecard": ScrollableCard,
   "section.hero": hero,
   "section.services": services,
-  "section.testimonialsection": TestimonialSection,
+  "section.testimonial": TestimonialSection,
+  "section.testimonials": SocialProof,
+  "section.benefits": Benefits,
   "section.blog.allposts": AllPosts,
   "section.forms.contact": contactForm,
+  "section.workexamples": WorkExamples,
 };
 
 export function SectionRenderer(props: { section: any }) {

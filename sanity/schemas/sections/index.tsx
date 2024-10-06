@@ -6,6 +6,10 @@ import testimonialsection from "./testimonialsection";
 import about from "./about";
 import allposts from "./blog/allposts";
 import contactForm from "./contactForm";
+import workexamples from "./workexamples";
+import testimonials from "./testimonials";
+import benefits from "./benefits";
+
 // Export components
 export const sections = [
   hero,
@@ -13,7 +17,10 @@ export const sections = [
   scrollablecard,
   services,
   testimonialsection,
+  testimonials,
   about,
+  benefits,
   allposts,
   contactForm,
+  workexamples,
 ];

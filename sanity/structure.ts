@@ -11,9 +11,10 @@ const structure: StructureResolver = (S, context) =>
       S.documentTypeListItem("page").title("Pages"),
       S.documentTypeListItem("author").title("Author"),
       S.divider(),
-
+      S.documentTypeListItem("service").title("Services"),
       S.documentTypeListItem("post").title("Blog Posts"),
       S.documentTypeListItem("work").title("Examples of Work"),
+      S.documentTypeListItem("section.testimonials").title("Testimonials"),
       //   S.documentTypeListItem("announcement").title("Announcements"),
       //   S.documentTypeListItem("redirect").title("Redirects"),
       //   S.divider(),

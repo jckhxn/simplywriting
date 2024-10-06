@@ -1,18 +1,24 @@
 # TODO List
 
 - Styling
+  -- All sections should have Header similiar to About Me
+  - Schema should return component name not first field
+- Metadata/OGraph stuff
+- Services, Examples of work should load from Sanity.
+
+# Page Layout
+
+- Hero with CTA
+- Social Proof
+- Services
+- Benefits?
+- Examples of Work CTA to full
+- Contact Form.
 
 # Tech Stack
 
 - NextJS
 - Sanity for content
-
-# Features
-
-- Blog
-- Contact form
-- Work page (Blog?)
-- Testimonial Page
 
 # Styling
 

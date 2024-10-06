@@ -1,13 +1,24 @@
 // All groq queries
 import { groq } from "next-sanity";
 
+// Services query
+export const SERVICES_QUERY = groq`*[_type == "service"]`;
+// Feature Work query
+export const FEATURED_WORK_QUERY = groq`*[_type == "work" && isFeatured == true]
+{
+   "image": image.asset->url,
+    title,
+    excerpt,
+     "slug": slug.current,
+         "category": category->title,
+}`;
 // All Work query
 export const ALL_WORKS_QUERY = groq`{
   "posts": *[_type == "work" && 
     ($category == "" || category->title == $category)
   ] | order(_createdAt desc)[0...2] {
     title,
-    description,
+    excerpt,
     "category": category->title,
     "slug": slug.current,
     "author": {

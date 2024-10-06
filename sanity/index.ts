@@ -7,6 +7,8 @@ import {
   POSTS_QUERY,
   ALL_WORKS_QUERY,
   WORK_QUERY,
+  FEATURED_WORK_QUERY,
+  SERVICES_QUERY,
 } from "./queries";
 
 // Site Global Settings, such as Header and Footer.
@@ -59,5 +61,17 @@ export async function loadWork(slug: string) {
   return loadQuery<PagePayload | null>({
     query: WORK_QUERY,
     params: { slug },
+  });
+}
+
+export async function loadFeaturedWorks() {
+  return loadQuery<PagePayload | null>({
+    query: FEATURED_WORK_QUERY,
+  });
+}
+
+export async function loadServices() {
+  return loadQuery<PagePayload | null>({
+    query: SERVICES_QUERY,
   });
 }

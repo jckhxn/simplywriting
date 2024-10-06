@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 import { MediaEditor } from "@/sanity/plugins/og-img/src/";
 import { mediaAssetSource } from "sanity-plugin-media";
 import { unsplashAssetSource } from "sanity-plugin-asset-source-unsplash";
-import { EarthGlobeIcon, GenerateIcon } from "@sanity/icons";
+import { GenerateIcon } from "@sanity/icons";
 
 export default defineType({
   name: "work",
@@ -13,6 +13,12 @@ export default defineType({
       title: "Title",
       type: "string",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "isFeatured",
+      title: "Featured Article?",
+      description: "If checked, this article will be featured on the homepage",
+      type: "boolean",
     }),
     {
       name: "image",

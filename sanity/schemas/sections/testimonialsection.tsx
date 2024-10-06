@@ -1,50 +1,16 @@
-import { defineSection } from "@tinloof/sanity-studio";
-import { defineField } from "sanity";
+import { defineField, defineType } from "sanity";
 
-// Testimonial Quote, IMG on right boolean
-export default defineSection({
-  name: "section.testimonialsection",
-  title: "Testimonial Section",
-  type: "object",
-
-  options: {
-    variants: [
-      {
-        assetUrl: "@/sanity/schemas/sections/images/header.png",
-      },
-    ],
-  },
+// Testimonials Section (an array of testimonials)
+export default defineType({
+  name: "section.testimonials",
+  title: "Testimonials Section",
+  type: "document",
   fields: [
     defineField({
-      name: "name",
-      title: "Testimonial's Name",
-      type: "string",
-    }),
-    defineField({
-      name: "position",
-      title: "Testimonial's Position",
-      type: "string",
-    }),
-    defineField({
-      name: "testimonial",
-      title: "Testimonial Text",
-      type: "string",
-    }),
-    defineField({
-      name: "image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: "isRight",
-          type: "boolean",
-          title: "Is image right positioned in the section?",
-          description: "If false, image will appear on the left side",
-          initialValue: true, // Optional: sets the default value to false
-        },
-      ],
+      name: "testimonials",
+      title: "Testimonials",
+      type: "array",
+      of: [{ type: "section.testimonial" }], // Reference the testimonial type
     }),
   ],
 });

@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { loadServices } from "@/sanity";
-import Link from "@/sanity/schemas/objects/link";
+import Button from "../../Button";
 import { PenTool, Megaphone, Globe, LucideIcon } from "lucide-react";
 
 // Define the type for individual services
@@ -15,28 +13,28 @@ type ServiceProps = {
   title?: string;
   heading?: string;
   subheading?: string;
+  services: Service;
+  ctas: any;
   _key?: string; // Optional key to set the section's ID
 };
 
 const iconMap: { [key: string]: LucideIcon } = {
-  "Blogging & SEO": PenTool,
+  Copywriting: PenTool,
   "Marketing Campaigns": Megaphone,
   "Web Content": Globe,
 };
 
-export default async function Services({
+export default function Services({
   title = "Our Services",
   heading = "Services that deliver your message",
   subheading = `We specialize in writing compelling copy that engages your
               audience, whether it's for SEO-optimized blogs, marketing
               campaigns, or website content. Let us help you tell your story in
               a way that resonates.`,
+  services,
+  ctas,
   _key, // Optional key used to set the section's ID
 }: ServiceProps) {
-  // Fetch the services data
-
-  // Should I just pass services from Sanity?
-  const services: Service[] = await loadServices();
   return (
     <section
       id={_key}
@@ -62,18 +60,18 @@ export default async function Services({
             <p className="text-indigo-700">{subheading}</p>
           </div>
 
-          <Button
-            className="mt-4 bg-stone-700 text-white hover:bg-stone-600
-          active:bg-stone-800 font-semibold transition-all
-          duration-200 ease-in-out focus:outline-none focus:ring-2 hover:text-white"
-          >
-            Learn More
-          </Button>
+          {ctas?.map((cta, key) => (
+            <Button
+              className="rounded-lg px-3 w-full bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-3  shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2"
+              {...cta}
+              key={key}
+            />
+          ))}
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service) => {
-            const Icon = iconMap[service.title] || PenTool;
+            const Icon = iconMap[service.title] || PenTool; // Get the appropriate icon
             return (
               <div
                 key={service._key}

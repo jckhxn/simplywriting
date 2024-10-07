@@ -14,11 +14,29 @@ export default defineSection({
     ],
   },
   fields: [
-    // A list of fields the form has and the text copy and button text
     defineField({
-      name: "title",
-      title: "Contact Form Title",
+      name: "heading",
+      title: "Heading",
       type: "string",
     }),
+    defineField({
+      name: "subheading",
+      title: "Subheading",
+      type: "string",
+    }),
+    defineField({
+      name: "benefits",
+      title: "Benefits",
+      type: "array",
+      of: [{ type: "benefit" }],
+    }),
   ],
+  // Add the custom preview to return "About Me" as the title in the content list
+  preview: {
+    prepare() {
+      return {
+        title: "Benefits Section",
+      };
+    },
+  },
 });

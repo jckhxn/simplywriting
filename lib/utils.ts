@@ -12,3 +12,6 @@ export function sanitizeString(str: string) {
 export const formatPublishedDate = (date: string) => {
   return moment(date).format("MMMM DD, YYYY");
 };
+export const formatSanityDate = (date: string, format: string) => {
+  return moment(date).format(format);
+};

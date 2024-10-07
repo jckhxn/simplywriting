@@ -34,4 +34,12 @@ export default defineSection({
       of: [{ type: "cta" }],
     }),
   ],
+
+  preview: {
+    prepare() {
+      return {
+        title: "Hero Section",
+      };
+    },
+  },
 });

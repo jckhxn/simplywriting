@@ -13,8 +13,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { submitContactForm } from "@/app/actions/contact";
+// Define props for the ContactForm component
+interface ContactFormProps {
+  _key: string; // Define the key prop here
+}
 
-export function contactForm() {
+export function contactForm({ _key }: ContactFormProps) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -43,7 +47,10 @@ export function contactForm() {
   };
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50">
+    <section
+      id={_key}
+      className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50"
+    >
       <Card className="mx-auto max-w-lg bg-white shadow-xl rounded-2xl overflow-hidden">
         <div className="bg-gradient-to-r from-purple-300 to-indigo-400 h-2" />
         <CardHeader className="p-6">

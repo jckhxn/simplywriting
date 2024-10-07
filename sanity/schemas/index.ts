@@ -12,7 +12,9 @@ import links from "./navigation/links";
 import author from "./objects/author";
 import work from "./documents/work";
 import categories from "./objects/categories";
-import service from "./documents/services";
+import service from "./objects/service";
+
+import benefit from "./objects/benefit";
 
 export const schemas: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -25,6 +27,8 @@ export const schemas: { types: SchemaTypeDefinition[] } = {
     link,
     links,
     work,
+
+    benefit,
 
     service,
     categories,

@@ -3,7 +3,7 @@ import { defineField } from "sanity";
 
 export default defineSection({
   name: "section.services",
-  title: "Services",
+  title: "Services Section",
   type: "object",
 
   options: {
@@ -16,22 +16,31 @@ export default defineSection({
   fields: [
     defineField({
       name: "title",
-      title: "Headline",
+      title: "Title of Services section",
       type: "string",
     }),
     defineField({
-      name: "body",
+      name: "heading",
+      title: "Heading of Services section",
       type: "string",
     }),
     defineField({
-      name: "image",
-      type: "image",
+      name: "subheading",
+      title: "Subheading of Services section",
+      type: "string",
     }),
+
     defineField({
       name: "ctas",
       title: "Call-to-actions",
       type: "array",
       of: [{ type: "cta" }],
+    }),
+    defineField({
+      name: "services",
+      title: "Services",
+      type: "array",
+      of: [{ type: "service" }],
     }),
   ],
 });

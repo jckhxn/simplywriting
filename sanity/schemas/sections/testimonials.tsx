@@ -1,7 +1,7 @@
 import { defineSection } from "@tinloof/sanity-studio";
 import { defineField } from "sanity";
 
-// Testimonials Section (an array of testimonials)
+// Testimonial Section
 export default defineSection({
   name: "section.testimonial",
   title: "Testimonial Section",
@@ -38,4 +38,10 @@ export default defineSection({
       },
     }),
   ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "position",
+    },
+  },
 });

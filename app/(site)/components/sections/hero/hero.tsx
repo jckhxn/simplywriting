@@ -1,4 +1,5 @@
 import React from "react";
+// import Button from "@/app/(site)/components/Button";
 import Button from "@/app/(site)/components/Button";
 import { SanityImage } from "../../SanityImage";
 
@@ -46,7 +47,7 @@ const Hero = ({
 
             {/* Right Side: Image */}
             <div className="w-64 h-64 lg:w-80 lg:h-80 mt-12 lg:mt-0">
-              <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-xl">
+              <div className="w-full h-full rounded-full overflow-hidden border-2 border-indigo-200 shadow-md antialiased">
                 <SanityImage
                   data={image}
                   className="w-full h-full object-cover"

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import config from "@/config";
+import { loadSite } from "@/sanity";
 
 interface Data {
   seo?: {
@@ -16,6 +17,8 @@ interface Data {
 
 export default async function processMetadata(data: Data): Promise<Metadata> {
   const { title, description, ogimage, noIndex } = data?.seo || {};
+  // If no data is passed, load the default site data.
+  // const defaultData = await loadSite(METADATA_QUERY);
 
   return {
     metadataBase: new URL(config.baseUrl),

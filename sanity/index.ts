@@ -12,9 +12,9 @@ import {
 } from "./queries";
 
 // Site Global Settings, such as Header and Footer.
-export async function loadSite() {
+export async function loadSite(query?: any) {
   return loadQuery<PagePayload | null>({
-    query: SITE_QUERY,
+    query: query ? query : SITE_QUERY,
   });
 }
 

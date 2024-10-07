@@ -1,5 +1,5 @@
 # TODO List
-  - Schema should return component name not first field
+
 - Metadata/OGraph stuff
 
 # Page Layout

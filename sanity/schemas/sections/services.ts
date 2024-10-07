@@ -43,4 +43,9 @@ export default defineSection({
       of: [{ type: "service" }],
     }),
   ],
+  preview: {
+    select: {
+      title: "Services Section",
+    },
+  },
 });

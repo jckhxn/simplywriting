@@ -1,9 +1,4 @@
 # TODO List
-
-- Components
-- Style, Schema (Section Linking too), Data loading from Sanity.
-- Styling
-  -- All sections should have Header similiar to About Me
   - Schema should return component name not first field
 - Metadata/OGraph stuff
 

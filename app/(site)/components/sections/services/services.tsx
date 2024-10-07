@@ -13,8 +13,8 @@ type ServiceProps = {
   title?: string;
   heading?: string;
   subheading?: string;
-  services: Service;
-  ctas: any;
+  services: Service[];
+  ctas: any[];
   _key?: string; // Optional key to set the section's ID
 };
 
@@ -53,20 +53,22 @@ export default function Services({
             className="w-12 h-0.5 bg-indigo-300 mb-8"
             aria-hidden="true"
           ></div>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight text-indigo-900">
               {heading}
             </h1>
             <p className="text-indigo-700">{subheading}</p>
           </div>
 
-          {ctas?.map((cta, key) => (
-            <Button
-              className="rounded-lg px-3 w-full bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-3  shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2"
-              {...cta}
-              key={key}
-            />
-          ))}
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+            {ctas?.map((cta, key) => (
+              <Button
+                className="rounded-lg px-6 py-3 bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2"
+                {...cta}
+                key={key}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">

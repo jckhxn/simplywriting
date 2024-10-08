@@ -56,13 +56,22 @@ export const WORK_QUERY = groq`*[_type == "work" && slug.current==$slug][0]{
 // Post query
 export const POST_QUERY = groq`*[_type == "post" && slug.current==$slug][0]{
    "image": image.asset->url,
-    title,
-     "author": {
-      "name": author->name,
-      "image": author->image.asset->url
-    },
-    publishedDate,
-    content
+   title,
+   "author": {
+     "name": author->name,
+     "image": author->image.asset->url
+   },
+   publishedDate,
+   content,
+   seo {
+     ...,
+     "title": coalesce(title, ^.title),
+     "ogimage": coalesce(
+       ogimage.asset->url,       
+       ^.image.asset->url,         
+       *[_type == "site"][0].ogimage.asset->url 
+     )
+   }
 }
 `;
 

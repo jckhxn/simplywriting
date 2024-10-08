@@ -1,12 +1,13 @@
 // app/page.tsx
-import { Page } from "@/app/(site)/components/Page";
+
 import { loadPage } from "@/sanity";
 import processMetadata from "@/lib/processMetadata";
 import { notFound } from "next/navigation";
 import AllPosts from "../components/sections/blog/posts";
 
 export async function generateMetadata() {
-  const data = await loadPage("/");
+  const data = await loadPage("/blog");
+
   if (!data) notFound();
   // @ts-ignore
   return processMetadata(data);

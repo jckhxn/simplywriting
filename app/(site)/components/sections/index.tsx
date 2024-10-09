@@ -10,6 +10,7 @@ import { contactForm } from "./contact/contact-form";
 import WorkExamples from "./work/examples";
 import SocialProof from "./socialproof/socialproof";
 import Benefits from "./benefits/benefits";
+
 export const sections = {
   "section.aboutme": AboutSection,
   "section.animatedhero": AnimatedHero,

@@ -24,9 +24,6 @@ export default function SocialProof({
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50">
       <div className="max-w-xxl mx-auto">
-        <div className="flex items-center space-x-4 my-6">
-          <div className="flex-grow h-px bg-indigo-600"></div>
-        </div>
         <div className="mb-12">
           <h2 className="text-sm uppercase tracking-wide text-indigo-600 mb-2">
             {title}

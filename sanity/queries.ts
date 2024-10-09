@@ -41,17 +41,28 @@ export const ALL_WORKS_QUERY = groq`{
 
 `;
 // Work Document query
-export const WORK_QUERY = groq`*[_type == "work" && slug.current==$slug][0]{
-    "image": image.asset->url,
-   title,
-   excerpt,
-   "file": fileUpload.asset->url,
-    "author": {
-     "name": author->name,
-     "image": author->image.asset->url
-   },
-   date,
+export const WORK_QUERY = groq`*[_type == "work" && slug.current == $slug][0] {
+  "image": image.asset->url,
+  title,
+  excerpt,
+  "seo": {
+    // Use coalesce to provide defaults from the parent if seo fields are null
+    "title": coalesce(seo.title, title),
+    "description": coalesce(seo.description, excerpt),
+    "ogimage": coalesce(
+      seo.ogimage.asset->url,       
+      image.asset->url,  // Fallback to the parent's image
+      *[_type == "site"][0].ogimage.asset->url  // Fallback to the site default image
+    )
+  },
+  "file": fileUpload.asset->url,
+  "author": {
+    "name": author->name,
+    "image": author->image.asset->url
+  },
+  date
 }
+
 `;
 // Post query
 export const POST_QUERY = groq`*[_type == "post" && slug.current==$slug][0]{
@@ -126,16 +137,15 @@ export const PAGE_QUERY = groq`*[_type == "page" && pathname.current == $pathnam
     ...,
     ${CTAs}
   },
-  seo {
-    ...,
+  "seo": {
+    "title": coalesce(seo.title, title),  // Use seo.title or fallback to title
+    "description": coalesce(seo.description, description),  // Use seo.description or fallback to description
     "ogimage": coalesce(
-      ogimage.asset->url,
-      *[_type == "site"][0].ogimage.asset->url
+      seo.ogimage.asset->url, 
+      *[_type == "site"][0].ogimage.asset->url  // Fallback to the site default image if seo.ogimage is null
     )
   }
-}
-
-  `;
+}  `;
 
 // Fetch all components (sections) for a page.
 export const SECTIONS_QUERY = groq`*[_type == "page" && _id == $docId][0] {

@@ -5,30 +5,33 @@ import { loadFeaturedWorks } from "@/sanity";
 import { SanityImage } from "../../SanityImage";
 import Link from "next/link";
 
-type HeroProps = {
+type Props = {
   image: any;
+  title: string;
   heading: string;
   subheading: string;
   _key: string;
+  ctas: any;
 };
-export default async function WorkExamples(
+export default async function WorkExamples({
   _key,
-  image,
+  title = "Our Work",
   heading = "Here's an example of my work",
-  subheading = "Add more text description to the work example."
-) {
+  subheading = "Add more text description to the work example.",
+  ctas,
+}: Props) {
   // Load featured work.
   const featuredWorks = await loadFeaturedWorks();
 
   return (
     <section
       id={_key}
-      className="py-16 px-4 bg-gradient-to-br from-blue-50 to-cyan-50"
+      className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50"
     >
       <div className="max-w-xxl mx-auto">
         <div className="mb-12">
           <h2 className="text-sm uppercase tracking-wide text-blue-600 mb-2">
-            Our Work
+            {title}
           </h2>
           <div className="w-12 h-0.5 bg-blue-300 mb-8"></div>
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -37,14 +40,13 @@ export default async function WorkExamples(
             </h1>
             <p className="text-blue-700">{subheading}</p>
           </div>
-          <Link href="/writing">
+          {ctas?.map((cta, key) => (
             <Button
-              variant="outline"
-              className="mt-4 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-            >
-              View All Work
-            </Button>
-          </Link>
+              className="rounded-lg px-3 w-full bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-3  shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2"
+              {...cta}
+              key={key}
+            />
+          ))}
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {featuredWorks.map((work, index) => (
@@ -61,7 +63,7 @@ export default async function WorkExamples(
                   className="w-full h-48 object-cover"
                 />
 
-                <Badge className="absolute top-2 left-2 bg-blue-500 hover:bg-blue-600">
+                <Badge className="absolute top-2 left-2 bg-blue-200 hover:bg-blue-300">
                   {work.category}
                 </Badge>
               </div>
@@ -72,9 +74,9 @@ export default async function WorkExamples(
                 <p className="text-blue-700 mb-4">{work.excerpt}</p>
                 <Link href={`/writing/${work.slug}`}>
                   <Button
-                    variant="outline"
+                    variant="default"
                     size="sm"
-                    className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+                    className="rounded-lg px-3  bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-3  shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2e"
                   >
                     Read More
                   </Button>

@@ -20,8 +20,9 @@ export async function generateMetadata({
 }: {
   params: { path: string[] };
 }) {
-  const pathname = `/${params.path.join("/")}`;
-  const data = await loadPage(pathname);
+  const pathname = `${params.path.join("/")}`;
+
+  const data = await loadWork(pathname);
 
   // if (!data) notFound();
   return processMetadata(data);

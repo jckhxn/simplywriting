@@ -44,8 +44,10 @@ export default defineSection({
     }),
   ],
   preview: {
-    select: {
-      title: "Services Section",
+    prepare() {
+      return {
+        title: "Services Section",
+      };
     },
   },
 });

@@ -1,5 +1,8 @@
 # TODO List
 
+- Examples of Work Component
+- Move Writing/Blog Component to Sanity
+- Write up how to properly handle dynamic routes with Sanity CMS.
 - Metadata/OGraph stuff
 
 # Page Layout

@@ -28,7 +28,7 @@ export async function generateMetadata({
   // Join slug parts without leading '/'
   const slug = params.slug.join("/");
   const data = await loadPost(slug);
-
+  
   if (!data) notFound();
   // @ts-ignore
   return processMetadata(data);

@@ -14,14 +14,26 @@ export default defineSection({
   },
   fields: [
     defineField({
+      name: "title",
+      title: "Title of Testimonials section",
+      type: "string",
+    }),
+    defineField({
       name: "heading",
-      title: "Work Example Heading",
-      type: "text",
+      title: "Heading",
+      type: "string",
     }),
     defineField({
       name: "subheading",
-      title: "Work Example Subheading",
+      title: "Subheading",
       type: "string",
     }),
   ],
+  preview: {
+    prepare() {
+      return {
+        title: "Work Example Section",
+      };
+    },
+  },
 });

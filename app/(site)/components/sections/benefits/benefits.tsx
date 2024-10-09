@@ -6,47 +6,52 @@ type Benefit = {
 };
 
 type BenefitsProps = {
-  heading: string;
-  subheading: string;
-  benefits: Benefit[]; // Specify the type for benefits
+  title?: string;
+  heading?: string;
+  subheading?: string;
+  benefits: Benefit[];
 };
 
 export default function Benefits({
-  heading = "Why Choose Us",
-  subheading = "Experience the difference with our expert copywriting services",
-  benefits = [], // Default to an empty array
+  title = "Why Choose Us",
+  heading = "Benefits of Our Services",
+  subheading = "Discover the key advantages of working with us.",
+  benefits = [],
 }: BenefitsProps) {
   return (
-    <section
-      className="py-16 px-4 bg-gradient-to-br from-teal-50 to-indigo-50"
-      aria-labelledby="benefits-title"
-    >
+    <section className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50">
       <div className="max-w-xxl mx-auto">
-        <div className="flex items-center space-x-4 my-6">
-          <div className="flex-grow h-px bg-indigo-600"></div>
-        </div>
-        <div className="text-center mb-12">
-          <h2
-            id="benefits-title"
-            className="text-3xl font-bold text-teal-800 mb-2"
-          >
-            {heading}
+        <div className="mb-12">
+          <h2 className="text-sm uppercase tracking-wide text-indigo-600 mb-2">
+            {title} THIS SHOULD BE
           </h2>
-          <p className="text-xl text-teal-600">{subheading}</p>
+          <div className="w-12 h-0.5 bg-indigo-300 mb-8"></div>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight text-indigo-900">
+              {heading}
+            </h1>
+            <p className="text-indigo-700">{subheading}</p>
+          </div>
         </div>
-        <div className="grid md:grid-cols-2 gap-8">
+
+        <div className="grid md:grid-cols-3 gap-8">
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="flex items-start space-x-4 p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="flex flex-col items-center space-y-4 p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
-              <CheckCircle className="w-6 h-6 text-teal-500 flex-shrink-0" />
-              <div>
-                <h3 className="text-xl font-semibold text-teal-800 mb-1">
-                  {benefit.title}
-                </h3>
-                <p className="text-teal-600">{benefit.description}</p>
+              <div
+                className="w-16 h-16 flex items-center justify-center bg-indigo-100 rounded-full"
+                aria-hidden="true"
+              >
+                <CheckCircle className="w-8 h-8 text-indigo-600" />
               </div>
+              <h3 className="text-xl font-semibold text-indigo-900 text-center">
+                {benefit.title}
+              </h3>
+              <p className="text-indigo-600 text-center">
+                {benefit.description}
+              </p>
             </div>
           ))}
         </div>

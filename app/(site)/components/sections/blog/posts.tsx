@@ -20,7 +20,10 @@ export default async function AllPosts({ page }: { page: number }) {
   // BIG assumption that no posts means invalid page.
   if (posts.length == 0) redirect("/blog");
   return (
-    <div className="bg-background text-foreground min-h-screen">
+    <div
+      className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-900
+    "
+    >
       <main className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold mb-8 text-center">Recent Posts</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

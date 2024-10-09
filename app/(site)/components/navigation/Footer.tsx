@@ -1,40 +1,34 @@
+import moment from "moment";
 import Link from "next/link";
 
-export default function Footer() {
+type FooterProps = {
+  company: string;
+  links: [];
+};
+export default function Footer({ company, links = [] }: FooterProps) {
   return (
     <footer className="bg-gray-100 p-6 md:py-12 w-full dark:bg-gray-800">
       <div className="container max-w-7xl flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2">
           <Link href="#" prefetch={false}>
             <MountainIcon className="h-6 w-6" />
-            <span className="sr-only">Acme Inc</span>
+            <span className="sr-only"> {company}</span>
           </Link>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            &copy; 2024 Acme Inc. All rights reserved.
+            &copy; {moment().format("YYYY")} {company} All rights reserved.
           </p>
         </div>
         <nav className="flex gap-4 sm:gap-6">
-          <Link
-            href="#"
-            className="text-xs hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Terms of Service
-          </Link>
-          <Link
-            href="#"
-            className="text-xs hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Privacy
-          </Link>
-          <Link
-            href="#"
-            className="text-xs hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Contact
-          </Link>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              prefetch={false}
+              className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+            >
+              {link.text}
+            </Link>
+          ))}
         </nav>
       </div>
     </footer>

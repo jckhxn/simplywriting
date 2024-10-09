@@ -90,46 +90,21 @@ export function navbar2({ name = "B·", ctas, links }: NavProps) {
           <div className="md:hidden absolute top-20 right-0 w-full bg-white shadow-lg z-50">
             <NavigationMenu>
               <NavigationMenuList className="flex flex-col space-y-2 p-4">
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/"
-                    className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
-                    prefetch={false}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Home
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/work"
-                    className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
-                    prefetch={false}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Work
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/testimonials"
-                    className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
-                    prefetch={false}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Testimonials
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link
-                    href="/contact"
-                    className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
-                    prefetch={false}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Contact
-                  </Link>
-                </NavigationMenuLink>
+                {links.map((link: any, index: number) => (
+                  <NavigationMenuLink asChild key={index}>
+                    <Button
+                      className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
+                      {...link}
+                    />
+                  </NavigationMenuLink>
+                ))}
+                {ctas.map((cta: any, index: number) => (
+                  <Button
+                    className="h-10 px-4 py-2 rounded-md text-[18px] bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 transition-colors"
+                    {...cta}
+                    key={index}
+                  />
+                ))}
               </NavigationMenuList>
             </NavigationMenu>
           </div>

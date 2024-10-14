@@ -12,6 +12,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
+  contactEmail: z.string().email("Invalid contact email address"),
   email: z.string().email("Invalid email address"),
   message: z.string().min(10, "Message must be at least 10 characters long"),
 });
@@ -33,13 +34,14 @@ export async function submitContactForm(formData: FormData) {
     };
   }
 
-  const { firstName, lastName, email, message } = validatedFields.data;
+  const { firstName, lastName, email, message, contactEmail } =
+    validatedFields.data;
 
   try {
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: "SimplyWriting.net <donotreply@simplywriting.net>",
-      to: process.env.CONTACT_EMAIL,
+      to: contactEmail,
       subject: "New Contact Form Submission",
       html: `
         <h1>New Contact Form Submission</h1>

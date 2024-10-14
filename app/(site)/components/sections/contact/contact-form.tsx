@@ -13,12 +13,20 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { submitContactForm } from "@/app/actions/contact";
-// Define props for the ContactForm component
+
 interface ContactFormProps {
-  _key: string; // Define the key prop here
+  title: string;
+  description: string;
+  _key: string;
+  contactEmail: string; // This is the email address where the form data will be sent.
 }
 
-export function contactForm({ _key }: ContactFormProps) {
+export function contactForm({
+  _key,
+  title = "Get in touch",
+  description = "We'd love to hear from you. Fill out the form below and we'll get back to you shortly.",
+  contactEmail,
+}: ContactFormProps) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -41,7 +49,15 @@ export function contactForm({ _key }: ContactFormProps) {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = new FormData(e.currentTarget);
+
+    // Create a FormData object with form data and contactEmail
+    const form = new FormData();
+    form.append("firstName", formData.firstName);
+    form.append("lastName", formData.lastName);
+    form.append("email", formData.email);
+    form.append("message", formData.message);
+    form.append("contactEmail", contactEmail); // Attach the contactEmail to form data
+
     const result = await submitContactForm(form);
     // Handle form submission result here (e.g., update statusMessage or errors)
   };
@@ -55,11 +71,10 @@ export function contactForm({ _key }: ContactFormProps) {
         <div className="bg-gradient-to-r from-purple-300 to-indigo-400 h-2" />
         <CardHeader className="p-6">
           <CardTitle className="text-3xl font-bold text-indigo-800">
-            Get in Touch
+            {title}
           </CardTitle>
           <CardDescription className="text-indigo-600 mt-2">
-            We'd love to hear from you. Fill out the form below and we'll get
-            back to you shortly.
+            {description}
           </CardDescription>
           {statusMessage && (
             <p className="text-center text-purple-500 mt-4 font-semibold">

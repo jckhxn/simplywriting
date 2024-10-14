@@ -20,5 +20,16 @@ export default defineSection({
       title: "Contact Form Title",
       type: "string",
     }),
+    defineField({
+      name: "description",
+      title: "Contact Form Description",
+      type: "string",
+    }),
+    defineField({
+      name: "contactEmail",
+      title: "Contact Form  Email",
+      description: "The email in which the contact form will be sent to",
+      type: "string",
+    }),
   ],
 });

@@ -59,7 +59,15 @@ export function contactForm({
     form.append("contactEmail", contactEmail); // Attach the contactEmail to form data
 
     const result = await submitContactForm(form);
-    // Handle form submission result here (e.g., update statusMessage or errors)
+
+    if (result.success) {
+      setStatusMessage(result.message);
+      setErrors({});
+    } else {
+      setErrors(result.errors || {});
+      console.log(result);
+      setStatusMessage(result.message || "Failed to submit the form.");
+    }
   };
 
   return (

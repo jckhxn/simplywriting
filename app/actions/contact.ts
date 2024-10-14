@@ -1,5 +1,3 @@
-// app/actions/contact.ts
-
 "use server";
 
 import { z } from "zod";
@@ -12,21 +10,29 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const schema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
-  contactEmail: z.string().email("Invalid contact email address"),
   email: z.string().email("Invalid email address"),
   message: z.string().min(10, "Message must be at least 10 characters long"),
 });
 
 export async function submitContactForm(formData: FormData) {
-  // Validate the input
-  const validatedFields = schema.safeParse({
+  // Extract form fields
+  const formFields = {
     firstName: formData.get("firstName"),
     lastName: formData.get("lastName"),
     email: formData.get("email"),
     message: formData.get("message"),
-  });
+    contactEmail: formData.get("contactEmail"),
+  };
 
-  // If validation fails, return the errors
+  // Remove non-ASCII characters from contactEmail
+  // Why Sanity CMS does this I have no idea.
+  const sanitizedContactEmail = formFields.contactEmail
+    ? (formFields.contactEmail as string).replace(/[^\x00-\x7F]/g, "")
+    : "";
+
+  // Validate the input
+  const validatedFields = schema.safeParse(formFields);
+
   if (!validatedFields.success) {
     return {
       success: false,
@@ -34,14 +40,13 @@ export async function submitContactForm(formData: FormData) {
     };
   }
 
-  const { firstName, lastName, email, message, contactEmail } =
-    validatedFields.data;
+  const { firstName, lastName, email, message } = validatedFields.data;
+  console.log(sanitizedContactEmail);
 
   try {
-    // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: "SimplyWriting.net <donotreply@simplywriting.net>",
-      to: contactEmail,
+      to: sanitizedContactEmail,
       subject: "New Contact Form Submission",
       html: `
         <h1>New Contact Form Submission</h1>
@@ -52,14 +57,13 @@ export async function submitContactForm(formData: FormData) {
     });
 
     if (error) {
-      console.error("Error sending email:", error);
+      console.error("Email sending error:", error);
       return { success: false, message: "Failed to send email" };
     }
 
-    console.log("Email sent successfully:", data);
     return { success: true, message: "Form submitted successfully!" };
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Form submission error:", error);
     return {
       success: false,
       message: "An error occurred while processing your request",

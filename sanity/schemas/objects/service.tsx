@@ -15,5 +15,11 @@ export default defineType({
       title: "Service Description",
       type: "string",
     }),
+    defineField({
+      name: "features",
+      title: "Service Features",
+      type: "array",
+      of: [{ type: "string" }],
+    }),
   ],
 });

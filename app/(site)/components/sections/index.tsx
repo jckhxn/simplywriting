@@ -1,4 +1,3 @@
-import AnimatedHero from "./AnimatedHero";
 import ScrollableCard from "./ScrollableCard";
 
 import hero from "./hero/hero";
@@ -13,7 +12,6 @@ import Benefits from "./benefits/benefits";
 
 export const sections = {
   "section.aboutme": AboutSection,
-  "section.animatedhero": AnimatedHero,
   "section.scrollablecard": ScrollableCard,
   "section.hero": hero,
   "section.services": services,

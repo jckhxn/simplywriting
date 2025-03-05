@@ -1,28 +1,49 @@
+"use client";
 import Link from "next/link";
 
 import { Container } from "@/app/(site)/components/Container";
-import { FadeIn } from "@/app/(site)/components/animate/FadeIn";
-
+import ScrollReveal from "./components/ScrollReveal";
+import { AlertTriangle, Home, ArrowLeft } from "lucide-react";
+import { Button } from "@/app/(site)/components/ui/button";
+import { useRouter } from "next/navigation";
 export default function NotFound() {
+  const router = useRouter();
   return (
-    <Container className="flex h-full items-center pt-24 sm:pt-32 lg:pt-40">
-      <FadeIn className="flex max-w-xl flex-col items-center text-center">
-        <p className="font-display text-4xl font-semibold text-neutral-950 sm:text-5xl">
-          404
-        </p>
-        <h1 className="mt-4 font-display text-2xl font-semibold text-neutral-950">
-          Page not found
-        </h1>
-        <p className="mt-2 text-sm text-neutral-600">
-          Sorry, we couldn’t find the page you’re looking for.
-        </p>
-        <Link
-          href="/"
-          className="mt-4 text-sm font-semibold text-neutral-950 transition hover:text-neutral-700"
-        >
-          Go to the home page
-        </Link>
-      </FadeIn>
-    </Container>
+    <ScrollReveal>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className="max-w-md w-full text-center space-y-8">
+          <div className="flex flex-col items-center justify-center">
+            <div className="h-24 w-24 rounded-full bg-red-100 flex items-center justify-center mb-4">
+              <AlertTriangle className="h-12 w-12 text-red-500" />
+            </div>
+            <h1 className="text-6xl font-bold text-gray-900">404</h1>
+            <h2 className="mt-2 text-2xl font-semibold text-gray-700">
+              Page Not Found
+            </h2>
+            <p className="mt-4 text-gray-600 mb-8">
+              Sorry, we couldn't find the page you're looking for. The page may
+              have been moved, deleted, or never existed.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 mt-2 justify-center">
+              <Button asChild variant="default" size="lg" className="gap-2">
+                <Link href="/">
+                  <Home className="h-4 w-4" />
+                  Return Home
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="gap-2">
+                <button onClick={() => router.back()}>
+                  <ArrowLeft className="h-4 w-4" />
+                  Go Back
+                </button>
+              </Button>
+            </div>
+          </div>
+          <p className="text-sm text-gray-500 mt-8">
+            If you believe this is an error, please contact our support team.
+          </p>
+        </div>
+      </div>
+    </ScrollReveal>
   );
 }

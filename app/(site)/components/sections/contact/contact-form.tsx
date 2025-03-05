@@ -7,11 +7,11 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+} from "@/app/(site)/components/ui/Card";
+import { Label } from "@/app/(site)/components/ui/label";
+import { Input } from "@/app/(site)/components/ui/input";
+import { Textarea } from "@/app/(site)/components/ui/textarea";
+import { Button } from "@/app/(site)/components/ui/button";
 import { submitContactForm } from "@/app/actions/contact";
 
 interface ContactFormProps {

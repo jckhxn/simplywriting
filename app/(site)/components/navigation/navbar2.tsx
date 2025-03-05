@@ -6,10 +6,10 @@ import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuLink,
-} from "@/components/ui/navigation-menu";
+} from "@/app/(site)/components/ui/navigation-menu";
 // Sanity Link button
 import Button from "@/app/(site)/components/Button";
-import { Button as ShadcnButton } from "@/components/ui/button";
+import { Button as ShadcnButton } from "@/app/(site)/components/ui/button";
 
 type NavProps = {
   name?: string;

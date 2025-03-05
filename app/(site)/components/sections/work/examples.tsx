@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/app/(site)/components/ui/button";
+import { Badge } from "@/app/(site)/components/ui/badge";
 import { loadFeaturedWorks } from "@/sanity";
 import { SanityImage } from "../../SanityImage";
 import Link from "next/link";

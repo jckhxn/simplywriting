@@ -1,8 +1,12 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/app/(site)/components/ui/Card";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/app/(site)/components/ui/avatar";
 import { Quote } from "lucide-react";
 import { SanityImage } from "../../SanityImage";
 

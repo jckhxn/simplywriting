@@ -1,5 +1,4 @@
-import React from "react";
-import Button from "@/app/(site)/components/Button";
+import { ChevronDown } from "lucide-react";
 import { SanityImage } from "../../SanityImage";
 
 type HeroProps = {
@@ -9,7 +8,6 @@ type HeroProps = {
   ctas: any;
   _key: string;
 };
-
 const Hero = ({
   _key,
   image,
@@ -19,46 +17,82 @@ const Hero = ({
 }: HeroProps) => {
   return (
     <section
-      id={_key}
-      className="w-full bg-blue-50 relative z-10 overflow-hidden"
+      id="home"
+      className="relative min-h-screen flex items-center justify-center pt-20 px-6 md:px-10 overflow-hidden"
     >
-      <div className="py-12 lg:py-28">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex flex-col lg:flex-row items-center justify-between max-w-6xl mx-auto">
-            {/* Left Side: Text Content */}
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:w-1/2 lg:pr-12 mb-8 lg:mb-0">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight text-gray-900 mb-4 sm:mb-6">
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-background to-background/40"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d')] bg-cover bg-center opacity-5"></div>
+      </div>
+
+      <div className="container max-w-6xl mx-auto z-10">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="order-2 md:order-1">
+            <div className="space-y-6">
+              <div className="opacity-0 animate-fade-in">
+                <span className="tag animation-delay-100">
+                  Professional Writing Service
+                </span>
+              </div>
+
+              <h1 className="section-title text-4xl md:text-5xl lg:text-6xl opacity-0 animate-fade-in animation-delay-200">
                 {title}
+                Elevate Your Writing{" "}
+                <span className="text-primary">Journey</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-6 sm:mb-8 max-w-2xl">
+
+              <p className="text-lg md:text-xl text-foreground/80 max-w-md opacity-0 animate-fade-in animation-delay-300">
                 {body}
+                Professional writing services tailored to your needs. From
+                content creation to editing, we help you communicate with
+                clarity and impact.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
-                {ctas?.map((cta, key) => (
-                  <Button
-                    className="rounded-lg px-3 w-full sm:w-auto bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-2 sm:py-3 shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2"
-                    {...cta}
-                    key={key}
-                  />
-                ))}
+
+              {/* CTAS GO HERE */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-2 opacity-0 animate-fade-in animation-delay-400">
+                <a href="#services" className="button-primary">
+                  Our Services
+                </a>
+                <a href="#contact" className="button-secondary">
+                  Get in Touch
+                </a>
               </div>
             </div>
+          </div>
 
-            {/* Right Side: Full Image */}
-            <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
-              <div className="w-full overflow-hidden rounded-lg shadow-md aspect-w-16 aspect-h-9">
-                <SanityImage
-                  data={image}
-                  className="w-full h-full object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1024px) 66vw, 50vw"
-                />
-              </div>
+          <div className="order-1 md:order-2 opacity-0 animate-fade-in animation-delay-300 flex flex-col items-center">
+            {/* Profile Image - Properly styled as circular */}
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-xl mb-8">
+              <SanityImage
+                data={image}
+                className="w-full h-full object-cover"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1024px) 66vw, 50vw"
+              />
+            </div>
+
+            {/* Quote Card - Positioned cleanly below the image */}
+            <div className="glass w-full max-w-md p-6 rounded-lg">
+              <blockquote className="text-center italic text-foreground/80">
+                <p className="text-lg md:text-xl">
+                  "The art of writing is the art of discovering what you
+                  believe."
+                </p>
+                <footer className="mt-2 text-sm font-medium text-foreground">
+                  — Gustave Flaubert
+                </footer>
+              </blockquote>
             </div>
           </div>
         </div>
       </div>
-      <div className="absolute top-0 right-0 w-1/4 h-1/4 bg-primary/5 rounded-bl-full"></div>
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 rounded-tr-full"></div>
+
+      <a
+        href="#about"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-foreground/60 hover:text-foreground transition-colors duration-300"
+        aria-label="Scroll down"
+      >
+        <ChevronDown size={28} className="animate-bounce" />
+      </a>
     </section>
   );
 };

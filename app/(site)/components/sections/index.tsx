@@ -1,6 +1,6 @@
 import AnimatedHero from "./AnimatedHero";
 import ScrollableCard from "./ScrollableCard";
-// import Hero from "./Hero";
+
 import hero from "./hero/hero";
 import services from "./services/services";
 import TestimonialSection from "./testimonial/testimonial";

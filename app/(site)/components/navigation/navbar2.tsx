@@ -1,12 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuLink,
-} from "@/app/(site)/components/ui/navigation-menu";
+import { usePathname } from "next/navigation";
+
 // Sanity Link button
 import Button from "@/app/(site)/components/Button";
 import { Button as ShadcnButton } from "@/app/(site)/components/ui/button";
@@ -18,98 +16,91 @@ type NavProps = {
 };
 
 export function navbar2({ name = "B·", ctas, links }: NavProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const nameParts = name.split(" ");
 
-  // Function to toggle mobile menu
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen((prev) => !prev);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close mobile menu when changing routes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
-    <div>
-      <header className="flex h-20 w-full items-center px-4 md:px-8 lg:px-36">
-        <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="text-2xl font-bold" prefetch={false}>
-              {name}
-            </Link>
-          </div>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 transition-all duration-300 ${
+        isScrolled
+          ? "py-3 bg-white shadow-sm backdrop-blur-lg bg-opacity-80"
+          : "py-5 bg-transparent"
+      }`}
+    >
+      <div className="container max-w-6xl mx-auto">
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="text-xl md:text-2xl font-display font-bold tracking-tight text-foreground"
+          >
+            {nameParts[1] ? (
+              <>
+                {nameParts[0]}{" "}
+                <span className="text-primary">{nameParts[1]}</span>
+              </>
+            ) : (
+              nameParts[0]
+            )}
+            {/* Simply<span className="text-primary">Writing</span> */}
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
-            <NavigationMenu>
-              <NavigationMenuList className="flex space-x-8">
-                {links.map((link: any, index: number) => (
-                  <NavigationMenuLink asChild key={index}>
-                    <Button
-                      className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
-                      {...link}
-                    />
-                  </NavigationMenuLink>
-                ))}
-                {ctas.map((cta: any, index: number) => (
-                  <Button
-                    className="h-10 px-4 py-2 rounded-md text-[18px] bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 transition-colors"
-                    {...cta}
-                    key={index}
-                  />
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
+          <nav className="hidden md:flex items-center space-x-8">
+            {links.map((link: any, index: number) => (
+              <Button
+                className={`nav-link ${index === 0 ? "after:w-full" : ""}`} // Apply class if it's the first child
+                {...link}
+                key={index} // Ensure to add a key for each mapped element
+              />
+            ))}
+            {ctas.map((cta: any, index: number) => (
+              <Button className="nav-link" {...cta} key={index} />
+            ))}
+          </nav>
 
-          {/* Mobile Menu - Hamburger Icon */}
-          <div className="md:hidden">
-            <ShadcnButton
-              variant="ghost"
-              size="icon"
-              onClick={toggleMobileMenu}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
-            </ShadcnButton>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-foreground p-1"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation Links */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-20 right-0 w-full bg-white shadow-lg z-50">
-            <NavigationMenu>
-              <NavigationMenuList className="flex flex-col space-y-2 p-4">
-                {links.map((link: any, index: number) => (
-                  <NavigationMenuLink asChild key={index}>
-                    <Button
-                      className="text-[18px] text-stone-600 hover:text-stone-800 transition-colors"
-                      {...link}
-                    />
-                  </NavigationMenuLink>
-                ))}
-                {ctas.map((cta: any, index: number) => (
-                  <Button
-                    className="h-10 px-4 py-2 rounded-md text-[18px] bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 transition-colors"
-                    {...cta}
-                    key={index}
-                  />
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
-        )}
-      </header>
-    </div>
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-md p-5 animate-fade-in">
+          <nav className="flex flex-col space-y-4">
+            {links.map((link: any, index: number) => (
+              <Button
+                className={`nav-link ${index === 0 ? "after:w-full" : ""}`}
+                {...link}
+              />
+            ))}
+            {ctas.map((cta: any, index: number) => (
+              <Button className="nav-link" {...cta} key={index} />
+            ))}
+          </nav>
+        </div>
+      )}
+    </header>
   );
 }

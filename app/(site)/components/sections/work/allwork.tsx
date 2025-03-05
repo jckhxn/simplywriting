@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from "@/app/(site)/components/ui/avatar";
 import {
   Pagination,
   PaginationContent,
@@ -7,7 +11,7 @@ import {
   PaginationPrevious,
   PaginationLink,
   PaginationNext,
-} from "@/components/ui/pagination";
+} from "@/app/(site)/components/ui/pagination";
 import { loadWorks } from "@/sanity";
 import { formatPublishedDate, sanitizeString } from "@/lib/utils";
 

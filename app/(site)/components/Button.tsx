@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { sanitizeString } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 export default function Button({
   link,
@@ -10,7 +11,7 @@ export default function Button({
   // @ts-ignore
 }: Sanity.CTA & React.HTMLAttributes<HTMLAnchorElement>) {
   if (!link?.type) return null;
-  
+
   const props = {
     className: cn(style, className),
     children: children || link.label || link.internal?.title,

@@ -7,7 +7,7 @@ import AboutSection from "./about/about";
 import AllPosts from "./blog/posts";
 import { contactForm } from "./contact/contact-form";
 import WorkExamples from "./work/examples";
-import SocialProof from "./socialproof/socialproof";
+import SocialProof from "./testimonials/testimonials";
 import Benefits from "./benefits/benefits";
 
 export const sections = {

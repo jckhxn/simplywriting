@@ -1,17 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/app/(site)/components/ui/Card";
-import { Label } from "@/app/(site)/components/ui/label";
-import { Input } from "@/app/(site)/components/ui/input";
-import { Textarea } from "@/app/(site)/components/ui/textarea";
-import { Button } from "@/app/(site)/components/ui/button";
+import { Mail } from "lucide-react";
 import { submitContactForm } from "@/app/actions/contact";
 
 interface ContactFormProps {
@@ -28,9 +18,9 @@ export function contactForm({
   contactEmail,
 }: ContactFormProps) {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
+    subject: "",
     message: "",
   });
 
@@ -41,10 +31,7 @@ export function contactForm({
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,9 +39,9 @@ export function contactForm({
 
     // Create a FormData object with form data and contactEmail
     const form = new FormData();
-    form.append("firstName", formData.firstName);
-    form.append("lastName", formData.lastName);
+    form.append("name", formData.name);
     form.append("email", formData.email);
+    form.append("subject", formData.subject);
     form.append("message", formData.message);
     form.append("contactEmail", contactEmail); // Attach the contactEmail to form data
 
@@ -63,125 +50,143 @@ export function contactForm({
     if (result.success) {
       setStatusMessage(result.message);
       setErrors({});
+      setFormData({ name: "", email: "", subject: "", message: "" });
     } else {
       setErrors(result.errors || {});
-      console.log(result);
       setStatusMessage(result.message || "Failed to submit the form.");
     }
   };
 
   return (
-    <section
-      id={_key}
-      className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50"
-    >
-      <Card className="mx-auto max-w-lg bg-white shadow-xl rounded-2xl overflow-hidden">
-        <div className="bg-gradient-to-r from-purple-300 to-indigo-400 h-2" />
-        <CardHeader className="p-6">
-          <CardTitle className="text-3xl font-bold text-indigo-800">
-            {title}
-          </CardTitle>
-          <CardDescription className="text-indigo-600 mt-2">
-            {description}
-          </CardDescription>
-          {statusMessage && (
-            <p className="text-center text-purple-500 mt-4 font-semibold">
-              {statusMessage}
-            </p>
-          )}
-        </CardHeader>
-        <CardContent className="p-6">
-          <form className="space-y-6" onSubmit={onSubmit}>
-            <div className="grid grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="first-name"
-                  className="text-indigo-600 font-medium"
-                >
-                  First Name
-                </Label>
-                <Input
-                  id="first-name"
-                  name="firstName"
-                  placeholder="John"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required
-                  className="border-indigo-300 focus:ring-purple-400 focus:border-purple-400 rounded-lg"
-                />
-                {errors.firstName && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.firstName[0]}
-                  </p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label
-                  htmlFor="last-name"
-                  className="text-indigo-600 font-medium"
-                >
-                  Last Name
-                </Label>
-                <Input
-                  id="last-name"
-                  name="lastName"
-                  placeholder="Doe"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  required
-                  className="border-indigo-300 focus:ring-purple-400 focus:border-purple-400 rounded-lg"
-                />
-                {errors.lastName && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.lastName[0]}
-                  </p>
-                )}
+    <section id={_key} className="py-24 px-6 md:px-10 bg-secondary/30">
+      <div className="container max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12">
+          <div>
+            <span className="tag">Get in Touch</span>
+            <h2 className="section-title mt-3 mb-6">{title}</h2>
+            <p className="text-foreground/80 mb-8 max-w-md">{description}</p>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
+                  <Mail size={18} />
+                </div>
+                <div>
+                  <p className="text-sm text-foreground/60">Email</p>
+                  <p className="text-foreground">contact@simplywriting.net</p>
+                </div>
               </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-indigo-600 font-medium">
-                Email Address
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="johndoe@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="border-indigo-300 focus:ring-purple-400 focus:border-purple-400 rounded-lg"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email[0]}</p>
+          </div>
+
+          <div>
+            <form onSubmit={onSubmit} className="glass p-8 rounded-lg">
+              <div className="grid grid-cols-1 gap-y-5">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-foreground/80 mb-1"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    required
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.name[0]}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-foreground/80 mb-1"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    required
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.email[0]}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-foreground/80 mb-1"
+                  >
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    required
+                  />
+                  {errors.subject && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.subject[0]}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-foreground/80 mb-1"
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
+                    required
+                  ></textarea>
+                  {errors.message && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.message[0]}
+                    </p>
+                  )}
+                </div>
+
+                <button type="submit" className="button-primary mt-2">
+                  Send Message
+                </button>
+              </div>
+              {statusMessage && (
+                <p className="text-center text-purple-500 mt-4 font-semibold">
+                  {statusMessage}
+                </p>
               )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="message" className="text-indigo-600 font-medium">
-                Your Message
-              </Label>
-              <Textarea
-                id="message"
-                name="message"
-                placeholder="Tell us what's on your mind..."
-                className="min-h-[120px] border-indigo-300 focus:ring-purple-400 focus:border-purple-400 rounded-lg"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              />
-              {errors.message && (
-                <p className="text-red-500 text-sm mt-1">{errors.message[0]}</p>
-              )}
-            </div>
-            <Button
-              type="submit"
-              className="w-full bg-stone-700 text-gray-200 font-semibold py-3 rounded-lg shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 hover:bg-stone-500"
-            >
-              Send Message
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            </form>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

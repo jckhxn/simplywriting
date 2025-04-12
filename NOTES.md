@@ -1,3 +1,13 @@
+# UI sections to do
+
+testimonials
+contact
+footer
+
+# Fixes, Additions
+Footer needs to display links, company, etc properly
+Fix Resend (If localhost isnt problem)
+
 Rebuid direct linking to components
 Sanity passes \_type = name of component
 Each component has a unique name set in schema and is surfaced by a custom input component in the CTA button schema.

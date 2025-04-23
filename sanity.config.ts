@@ -2,16 +2,16 @@ import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 
-import { pages } from "@/sanity/plugins/presentation/sanity-kit/src";
+import { pages } from "@tinloof/sanity-studio";
 
-import { apiVersion, dataset, projectId } from "./sanity/env";
-import { schemas } from "./sanity/schemas";
+import { apiVersion, dataset, projectId } from "@/sanity/env";
+import { schemas } from "@/sanity/schemas";
 import config from "@/config";
 import { media, mediaAssetSource } from "sanity-plugin-media";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 
 import StudioLogo from "@/app/(site)/components/StudioLogo";
-import structure from "./sanity/structure";
+import structure from "@/sanity/structure";
 // deskStructure.js
 
 // Custom CSS for the studio

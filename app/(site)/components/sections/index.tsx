@@ -1,3 +1,4 @@
+import { FC } from "react";
 import ScrollableCard from "./ScrollableCard";
 
 import hero from "./hero/hero";
@@ -10,7 +11,12 @@ import WorkExamples from "./work/examples";
 import SocialProof from "./testimonials/testimonials";
 import Benefits from "./benefits/benefits";
 
-export const sections = {
+type SectionProps = {
+  _type: string;
+  [key: string]: any;
+};
+
+export const sections: Record<string, FC<any>> = {
   "section.aboutme": AboutSection,
   "section.scrollablecard": ScrollableCard,
   "section.hero": hero,
@@ -23,14 +29,12 @@ export const sections = {
   "section.workexamples": WorkExamples,
 };
 
-export function SectionRenderer(props: { section: any }) {
-  // @ts-ignore
-
-  const Section = sections[props.section._type];
+export function SectionRenderer({ section }: { section: SectionProps }) {
+  const Section = sections[section._type];
 
   if (!Section) {
     return null;
   }
 
-  return <Section {...props.section} />;
+  return <Section {...section} />;
 }

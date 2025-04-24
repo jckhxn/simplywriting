@@ -1,4 +1,8 @@
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from "@/app/(site)/components/ui/avatar";
 import { formatPublishedDate } from "@/lib/utils";
 import { PortableText } from "@portabletext/react";
 import { ArrowLeft } from "lucide-react";

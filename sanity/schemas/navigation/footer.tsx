@@ -1,7 +1,6 @@
-import { defineSection } from "@tinloof/sanity-studio";
 import { defineField } from "sanity";
 
-export const footerSection = defineSection({
+export const footerSection = defineField({
   name: "block.footer",
   title: "Footer",
   type: "object",

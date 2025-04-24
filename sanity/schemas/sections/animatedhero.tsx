@@ -1,7 +1,6 @@
-import { defineSection } from "@tinloof/sanity-studio";
 import { defineField } from "sanity";
 
-export default defineSection({
+export default defineField({
   name: "section.animatedhero",
   title: "Animated Hero",
   type: "object",

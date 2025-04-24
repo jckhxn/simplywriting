@@ -1,19 +1,10 @@
-import { defineSection } from "@tinloof/sanity-studio";
-import { defineField } from "sanity";
+import { defineType, defineField } from "sanity";
 
-export default defineSection({
+export default defineType({
   name: "section.scrollablecard",
   title: "Scrollable Card Section",
   description: "For testimonials, reviews, etc.",
   type: "object",
-  options: {
-    variants: [
-      {
-        
-        assetUrl: "/placeholder.svg",
-      },
-    ],
-  },
   fields: [
     defineField({
       name: "header",

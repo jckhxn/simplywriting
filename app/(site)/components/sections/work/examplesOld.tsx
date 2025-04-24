@@ -26,7 +26,7 @@ export default async function WorkExamples({
   return (
     <section
       id={_key}
-      className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50"
+      className="py-16 px-4 bg-linear-to-br from-purple-50 to-indigo-50"
     >
       <div className="max-w-xxl mx-auto">
         <div className="mb-12">
@@ -42,7 +42,7 @@ export default async function WorkExamples({
           </div>
           {ctas?.map((cta, key) => (
             <Button
-              className="rounded-lg px-3 w-full bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-3  shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2"
+              className="rounded-lg px-3 w-full bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-3  shadow-2xs transition-all duration-200 ease-in-out focus:outline-hidden focus:ring-2"
               {...cta}
               key={key}
             />
@@ -76,7 +76,7 @@ export default async function WorkExamples({
                   <Button
                     variant="default"
                     size="sm"
-                    className="rounded-lg px-3  bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-3  shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2e"
+                    className="rounded-lg px-3  bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-3  shadow-2xs transition-all duration-200 ease-in-out focus:outline-hidden focus:ring-2e"
                   >
                     Read More
                   </Button>

@@ -1,5 +1,5 @@
 import { definePathname } from "@tinloof/sanity-studio";
-import { SectionsArrayInput } from "@tinloof/sanity-studio";
+
 import { defineField, defineType } from "sanity";
 import { sections } from "../sections";
 
@@ -61,8 +61,15 @@ export default defineType({
       of: sections.map((section) => ({
         type: section.name,
       })),
-      components: {
-        input: SectionsArrayInput,
+      options: {
+        insertMenu: {
+          views: [
+            {
+              name: "grid",
+              previewImageUrl: (type) => `/sections/${type}.png`,
+            },
+          ],
+        },
       },
     }),
   ],

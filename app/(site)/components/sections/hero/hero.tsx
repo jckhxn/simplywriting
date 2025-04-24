@@ -12,7 +12,7 @@ type HeroProps = {
 };
 const Hero = ({
   _key,
-  _type,
+
   image,
   title = "Welcome to our website",
   body = "New text will appear here as you add it",
@@ -21,11 +21,11 @@ const Hero = ({
   return (
     <ScrollReveal>
       <section
-        id={_type}
+        id="hero"
         className="relative min-h-screen flex items-center justify-center pt-20 px-6 md:px-10 overflow-hidden"
       >
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-background to-background/40"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-background to-background/40"></div>
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d')] bg-cover bg-center opacity-5"></div>
         </div>
 
@@ -41,8 +41,8 @@ const Hero = ({
 
                 <h1 className="section-title text-4xl md:text-5xl lg:text-6xl opacity-0 animate-fade-in animation-delay-200">
                   {title}
-                  Elevate Your Writing{" "}
-                  <span className="text-primary">Journey</span>
+                  {/* Elevate Your Writing{" "}
+                  <span className="text-primary">Journey</span> */}
                 </h1>
 
                 <p className="text-lg md:text-xl text-foreground/80 max-w-md opacity-0 animate-fade-in animation-delay-300">

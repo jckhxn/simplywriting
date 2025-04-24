@@ -49,7 +49,7 @@ export default async function WritingWorkPage({
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-gray-900">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-gray-100 text-gray-900">
       <main className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="mb-16 text-center">
           <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
@@ -75,7 +75,7 @@ export default async function WritingWorkPage({
                 className={`rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ${
                   isSelected
                     ? "bg-primary text-white shadow-lg scale-105"
-                    : "bg-white text-gray-700 hover:bg-gray-100 hover:shadow"
+                    : "bg-white text-gray-700 hover:bg-gray-100 hover:shadow-xs"
                 }`}
                 aria-current={isSelected ? "page" : undefined}
               >

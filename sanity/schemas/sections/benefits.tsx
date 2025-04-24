@@ -1,18 +1,10 @@
-import { defineSection } from "@tinloof/sanity-studio";
-import { defineField } from "sanity";
+import { defineType, defineField } from "sanity";
 
-export default defineSection({
+export default defineType({
   name: "section.benefits",
   title: "Benefits Section",
   type: "object",
 
-  options: {
-    variants: [
-      {
-        assetUrl: "@/sanity/schemas/sections/images/header.png",
-      },
-    ],
-  },
   fields: [
     defineField({
       name: "heading",

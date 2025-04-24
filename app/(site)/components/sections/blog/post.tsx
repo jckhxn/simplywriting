@@ -21,9 +21,9 @@ export function PostPage({
   data: PostPageProps;
 }) {
   return (
-    <div className="min-h-min bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex flex-col">
+    <div className="min-h-min bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex flex-col">
       {/* Header Section */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-white shadow-2xs border-b border-gray-200">
         <div className="container mx-auto px-4 py-3">
           <Link
             href="/blog"
@@ -35,7 +35,7 @@ export function PostPage({
       </header>
 
       {/* Main Content */}
-      <article className="flex-grow container mx-auto px-4 py-6">
+      <article className="grow container mx-auto px-4 py-6">
         <div className="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-lg">
           <img
             src={image || "/placeholder.svg"}

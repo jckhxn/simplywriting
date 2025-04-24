@@ -36,7 +36,7 @@ const Hero = ({
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full sm:w-auto">
                 {ctas?.map((cta, key) => (
                   <Button
-                    className="rounded-lg px-3 w-full sm:w-auto bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-2 sm:py-3 shadow-sm transition-all duration-200 ease-in-out focus:outline-none focus:ring-2"
+                    className="rounded-lg px-3 w-full sm:w-auto bg-stone-700 text-white hover:bg-stone-600 active:bg-stone-800 font-semibold py-2 sm:py-3 shadow-2xs transition-all duration-200 ease-in-out focus:outline-hidden focus:ring-2"
                     {...cta}
                     key={key}
                   />

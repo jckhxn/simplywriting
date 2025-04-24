@@ -36,11 +36,11 @@ const BrandWrapper = ({
         pink: "from-pink-300 via-white to-pink-300",
       },
       gradientDirection: {
-        top: "bg-gradient-to-t",
-        right: "bg-gradient-to-r",
-        bottom: "bg-gradient-to-b",
-        left: "bg-gradient-to-l",
-        bottomRight: "bg-gradient-to-br",
+        top: "bg-linear-to-t",
+        right: "bg-linear-to-r",
+        bottom: "bg-linear-to-b",
+        left: "bg-linear-to-l",
+        bottomRight: "bg-linear-to-br",
       },
     },
   });

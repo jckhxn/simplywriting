@@ -30,7 +30,7 @@ const ServiceCard = ({
 }) => {
   return (
     <div
-      className="bg-white rounded-lg p-8 shadow-sm border border-border/50 transition-all duration-300 hover:shadow-md hover:translate-y-[-4px] opacity-0 animate-scale-in"
+      className="bg-white rounded-lg p-8 shadow-2xs border border-border/50 transition-all duration-300 hover:shadow-md hover:translate-y-[-4px] opacity-0 animate-scale-in"
       style={{ animationPlayState: "paused" }}
     >
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
@@ -40,7 +40,7 @@ const ServiceCard = ({
           <li key={index} className="flex items-start gap-2">
             <CheckCircle
               size={18}
-              className="text-primary mt-0.5 flex-shrink-0"
+              className="text-primary mt-0.5 shrink-0"
             />
             <span className="text-sm text-foreground/80">{feature}</span>
           </li>

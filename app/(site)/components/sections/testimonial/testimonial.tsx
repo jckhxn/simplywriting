@@ -30,7 +30,7 @@ export default function TestimonialSection({
   return (
     <section
       id={_key}
-      className="bg-gradient-to-br from-purple-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8"
+      className="bg-linear-to-br from-purple-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8"
     >
       <Card className="max-w-lg mx-auto">
         <CardContent className="p-8 sm:p-12">

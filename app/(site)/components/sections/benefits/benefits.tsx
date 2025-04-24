@@ -19,7 +19,7 @@ export default function Benefits({
   benefits = [],
 }: BenefitsProps) {
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-purple-50 to-indigo-50">
+    <section className="py-16 px-4 bg-linear-to-br from-purple-50 to-indigo-50">
       <div className="max-w-xxl mx-auto">
         <div className="mb-12">
           <h2 className="text-sm uppercase tracking-wide text-indigo-600 mb-2">

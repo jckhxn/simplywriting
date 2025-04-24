@@ -1,36 +1,36 @@
 import { capitalize } from "lodash";
-import { useMemoObservable } from "react-rx";
+// import { useMemoObservable } from "react-rx";
 import { QueryParams, useDocumentStore } from "sanity";
 
-import {
-  NormalizedCreatablePage,
-  Page,
-  PagesNavigatorPluginOptions,
-  Tree,
-  TreeNode,
-} from "../../../types";
+// import {
+//   NormalizedCreatablePage,
+//   Page,
+//   PagesNavigatorPluginOptions,
+//   Tree,
+//   TreeNode,
+// } from "../../../types";
 
-export const useSanityFetch = ({
-  query,
-  variables,
-}: {
-  query: string;
-  variables: QueryParams;
-}) => {
-  const documentStore = useDocumentStore();
-  const subscribe = useMemoObservable(
-    () =>
-      documentStore.listenQuery(query, variables, {
-        perspective: "previewDrafts",
-      }),
-    [documentStore]
-  );
+// export const useSanityFetch = ({
+//   query,
+//   variables,
+// }: {
+//   query: string;
+//   variables: QueryParams;
+// }) => {
+//   const documentStore = useDocumentStore();
+//   const subscribe = useMemoObservable(
+//     () =>
+//       documentStore.listenQuery(query, variables, {
+//         perspective: "drafts",
+//       }),
+//     [documentStore]
+//   );
 
-  const loading = subscribe === undefined;
-  const data = subscribe;
+//   const loading = subscribe === undefined;
+//   const data = subscribe;
 
-  return [data, loading];
-};
+//   return [data, loading];
+// };
 
 export const pathnameToTitle = (pathname: string) => {
   if (pathname === "/") return "Home";

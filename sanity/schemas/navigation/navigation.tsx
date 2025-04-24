@@ -1,7 +1,6 @@
-import { defineSection } from "@tinloof/sanity-studio";
-import { defineField } from "sanity";
+import { defineField, defineType } from "sanity";
 
-export const navigation = defineSection({
+export const navigation = defineType({
   name: "nav.1",
   title: "navigation",
   type: "object",

@@ -112,8 +112,8 @@ export const ScrollCard = ({ image, quote, title, name }) => {
       <div className="relative">
         <img src="placeholder.avif" alt="Person" className="w-full" />
         {/* Bottom half gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-b from-transparent to-black opacity-90"></div>
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-b from-transparent to-black opacity-90"></div>
+        <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black to-transparent p-4">
           <p className="text-white text-sm italic">
             "BarelyHR made onboarding our new remote employees an absolute
             breeze."
@@ -122,7 +122,7 @@ export const ScrollCard = ({ image, quote, title, name }) => {
       </div>
       <div className="bg-black p-4">
         <p className="text-white font-semibold">Jack Hoff</p>
-        <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+        <p className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-600">
           Head of Marketing, TaxPad
         </p>
       </div>

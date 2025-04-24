@@ -95,7 +95,7 @@ export function contactForm({
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary/40"
                     required
                   />
                   {errors.name && (
@@ -118,7 +118,7 @@ export function contactForm({
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary/40"
                     required
                   />
                   {errors.email && (
@@ -141,7 +141,7 @@ export function contactForm({
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary/40"
                     required
                   />
                   {errors.subject && (
@@ -164,7 +164,7 @@ export function contactForm({
                     rows={4}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary/40 resize-none"
                     required
                   ></textarea>
                   {errors.message && (

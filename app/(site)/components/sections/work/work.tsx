@@ -27,8 +27,8 @@ const SingleDocumentPreview: React.FC<{ data: Props }> = ({ data }) => {
   const { title, excerpt, date, file, author } = data;
 
   return (
-    <div className="min-h-min bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex flex-col">
-      <header className="bg-white shadow-sm border-b border-gray-200">
+    <div className="min-h-min bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex flex-col">
+      <header className="bg-white shadow-2xs border-b border-gray-200">
         <div className="container mx-auto px-4 py-3">
           <Link
             href="/writing"
@@ -39,9 +39,9 @@ const SingleDocumentPreview: React.FC<{ data: Props }> = ({ data }) => {
         </div>
       </header>
 
-      <main className="flex-grow container mx-auto px-4 py-6">
+      <main className="grow container mx-auto px-4 py-6">
         <Card className="max-w-4xl mx-auto overflow-hidden bg-white shadow-lg border border-gray-200">
-          <CardHeader className="bg-gradient-to-r from-stone-100 to-white-100 text-gray-800 p-6">
+          <CardHeader className="bg-linear-to-r from-stone-100 to-white-100 text-gray-800 p-6">
             <CardTitle className="text-2xl sm:text-3xl font-bold text-indigo-900">
               {title}
             </CardTitle>
@@ -54,7 +54,7 @@ const SingleDocumentPreview: React.FC<{ data: Props }> = ({ data }) => {
               {excerpt}
             </p>
 
-            <div className="bg-gradient-to-br from-gray-50 to-indigo-50 rounded-lg shadow-inner p-3">
+            <div className="bg-linear-to-br from-gray-50 to-indigo-50 rounded-lg shadow-inner p-3">
               <div className="relative w-full h-0 pb-[100%] sm:pb-[75%] bg-white rounded-md shadow-md overflow-hidden">
                 <iframe
                   src={`https://docs.google.com/viewer?url=${file}&embedded=true`}

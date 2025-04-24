@@ -5,14 +5,6 @@ export default defineType({
   title: "About Me", // Display title for the section
   type: "object",
 
-  options: {
-    variants: [
-      {
-        assetUrl: "@/sanity/schemas/sections/images/header.png", // Example asset URL
-      },
-    ],
-  },
-
   fields: [
     defineField({
       name: "heading",

@@ -13,7 +13,7 @@ export default function Component({
   links,
 }: HeaderProps) {
   return (
-    <div className="relative z-30 flex items-center justify-between px-6 py-4 bg-white shadow-sm">
+    <div className="relative z-30 flex items-center justify-between px-6 py-4 bg-white shadow-2xs">
       <div className="flex items-center">
         {/* Logo/Site Name/Etc */}
         <Link
@@ -35,7 +35,7 @@ export default function Component({
       </div>
       {ctas?.map((cta, key) => (
         <Button
-          className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-2xs hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           {...cta}
           key={key}
         />

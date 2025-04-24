@@ -39,7 +39,7 @@ export function navbar2({ name = "B·", ctas, links }: NavProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-10 transition-all duration-300 ${
         isScrolled
-          ? "py-3 bg-white shadow-sm backdrop-blur-lg bg-opacity-80"
+          ? "py-3 bg-white shadow-2xs backdrop-blur-lg bg-opacity-80"
           : "py-5 bg-transparent"
       }`}
     >

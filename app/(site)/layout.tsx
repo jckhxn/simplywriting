@@ -33,6 +33,7 @@ export default async function RootLayout({
             <VisualEditing
               refresh={async (payload) => {
                 "use server";
+
                 if (!isDraftModeEnabled) {
                   console.debug(
                     "Skipped manual refresh because draft mode is not enabled"

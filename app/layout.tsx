@@ -13,19 +13,17 @@ const ptSerif = PT_Serif({
   variable: "--font-body",
 });
 
+// Define class names consistently to avoid hydration issues
+const htmlClasses = cn(`antialiased ${rufina.variable} ${ptSerif.variable}`);
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <html
-        lang="en"
-        className={cn("antialiased", rufina.variable, ptSerif.variable)}
-      >
-        <body>{children}</body>
-      </html>
-    </>
+    <html lang="en">
+      <body>{children}</body>
+    </html>
   );
 }

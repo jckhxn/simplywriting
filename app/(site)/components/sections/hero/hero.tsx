@@ -20,10 +20,7 @@ const Hero = ({
 }: HeroProps) => {
   return (
     <ScrollReveal>
-      <section
-        id="hero"
-        className="relative min-h-screen flex items-center justify-center pt-20 px-6 md:px-10 overflow-hidden"
-      >
+      <section className="relative min-h-screen flex items-center justify-center pt-20 px-6 md:px-10 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-linear-to-r from-background to-background/40"></div>
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d')] bg-cover bg-center opacity-5"></div>

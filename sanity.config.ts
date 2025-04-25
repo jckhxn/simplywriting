@@ -12,11 +12,12 @@ import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 
 import StudioLogo from "@/app/(site)/components/StudioLogo";
 import structure from "@/sanity/structure";
-// deskStructure.js
 
 // Custom CSS for the studio
 import "@/sanity/custom.css";
 import { defaultDocumentNode } from "./lib/defaultDocumentNode";
+
+import { resolve } from "@/sanity/lib/resolve";
 
 export default defineConfig({
   basePath: config.sanity.studioUrl,
@@ -29,9 +30,10 @@ export default defineConfig({
   plugins: [
     unsplashImageAsset(),
     pages({
+      resolve,
       previewUrl: {
         previewMode: {
-          enable: "/api/draft",
+          enable: "/api/enable-draft",
         },
       },
 

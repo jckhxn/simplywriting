@@ -3,7 +3,7 @@ import { MediaEditor } from "@/sanity/plugins/og-img/src/";
 import { mediaAssetSource } from "sanity-plugin-media";
 import brandLayout from "@/sanity/plugins/og-img/src/layouts/brandLayout";
 import { GenerateIcon } from "@sanity/icons";
-import { SectionsArrayInput } from "@tinloof/sanity-studio";
+
 import { footers, nav } from "../navigation";
 export default defineType({
   name: "site",
@@ -34,8 +34,15 @@ export default defineType({
       of: nav.map((nav) => ({
         type: nav.name,
       })),
-      components: {
-        input: SectionsArrayInput,
+      options: {
+        insertMenu: {
+          views: [
+            {
+              name: "grid",
+              previewImageUrl: (type) => `/sections/${type}.png`,
+            },
+          ],
+        },
       },
     }),
     defineField({
@@ -46,9 +53,6 @@ export default defineType({
       of: footers.map((footer) => ({
         type: footer.name,
       })),
-      components: {
-        input: SectionsArrayInput,
-      },
     }),
     // defineField({
     //   name: "title",

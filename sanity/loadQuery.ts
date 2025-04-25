@@ -16,9 +16,9 @@ export async function loadQuery<QueryResponse>({
   query: string;
   params?: QueryParams;
 }): Promise<QueryResponse> {
-  // const isDraftMode = draftMode().isEnabled;
-  // Dynamic routes mess up when calling this function
   const isDraftMode = true;
+  // (await draftMode()).isEnabled;
+
   const token = config.sanity.token;
 
   if (isDraftMode && !token) {

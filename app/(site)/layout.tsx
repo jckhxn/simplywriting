@@ -6,6 +6,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { draftMode } from "next/headers";
 import { loadSite } from "@/sanity";
 import { NavRenderer } from "@/app/(site)/components/navigation";
+import { SanityLive } from "@/sanity/live";
 const data = await loadSite();
 
 export default async function RootLayout({
@@ -29,11 +30,11 @@ export default async function RootLayout({
             return <NavRenderer key={nav._key} nav={nav} />;
           })}
 
+          {/* <SanityLive />  */}
           {isDraftModeEnabled && (
             <VisualEditing
               refresh={async (payload) => {
                 "use server";
-
                 if (!isDraftModeEnabled) {
                   console.debug(
                     "Skipped manual refresh because draft mode is not enabled"

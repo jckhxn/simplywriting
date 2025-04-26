@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardContent } from "@/app/(site)/components/ui/Card";
+import { Card, CardContent } from "@/app/(site)/components/ui/card";
 import {
   Avatar,
   AvatarFallback,

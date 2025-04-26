@@ -2,7 +2,7 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { Card } from "@/app/(site)/components/ui/Card";
+import { Card } from "@/app/(site)/components/ui/card";
 import Image from "next/image";
 const testimonials = [
   { id: 1, text: "Testimonial 1" },

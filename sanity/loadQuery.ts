@@ -16,8 +16,7 @@ export async function loadQuery<QueryResponse>({
   query: string;
   params?: QueryParams;
 }): Promise<QueryResponse> {
-  const isDraftMode = true;
-  // (await draftMode()).isEnabled;
+  const isDraftMode = (await draftMode()).isEnabled;
 
   const token = config.sanity.token;
 

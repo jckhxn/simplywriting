@@ -1,4 +1,4 @@
-import React from "react"; 
+import React from "react";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import {
@@ -7,8 +7,8 @@ import {
   CardHeader,
   CardTitle,
   CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/app/(site)/components/ui/card";
+import { Button } from "@/app/(site)/components/ui/button";
 import { formatPublishedDate } from "@/lib/utils";
 
 interface Props {

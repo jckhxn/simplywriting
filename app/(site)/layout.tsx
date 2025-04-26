@@ -7,13 +7,13 @@ import { draftMode } from "next/headers";
 import { loadSite } from "@/sanity";
 import { NavRenderer } from "@/app/(site)/components/navigation";
 import { SanityLive } from "@/sanity/live";
-const data = await loadSite();
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const data = await loadSite();
   const isDraftModeEnabled = (await draftMode()).isEnabled;
   return (
     <>

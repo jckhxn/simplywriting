@@ -8,9 +8,8 @@ export default async function DynamicRoute({
 }: {
   params: { path: string[] };
 }) {
-  const pathname = `/${params.path.join("/")}`;
+  const pathname = `/${(await params).path.join("/")}`;
   const data = await loadPage(pathname);
-  // @ts-ignore
 
   return <Page data={data} />;
 }
@@ -20,10 +19,10 @@ export async function generateMetadata({
 }: {
   params: { path: string[] };
 }) {
-  const pathname = `/${params.path.join("/")}`;
+  const pathname = `/${(await params).path.join("/")}`;
   const data = await loadPage(pathname);
 
   if (!data) notFound();
-  // @ts-ignore
+
   return processMetadata(data);
 }

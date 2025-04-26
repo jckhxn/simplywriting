@@ -9,12 +9,12 @@ export default async function DynamicRoute({
   params: { slug: string[] };
 }) {
   // Join slug parts without leading '/'
-  const slug = params.slug.join("/");
+
+  const slug = `${(await params).slug.join("/")}`;
   const data = await loadPost(slug);
 
   return (
     <>
-      {/* @ts-ignore */}
       <PostPage data={data} />;
     </>
   );
@@ -26,10 +26,10 @@ export async function generateMetadata({
   params: { slug: string[] };
 }) {
   // Join slug parts without leading '/'
-  const slug = params.slug.join("/");
+  const slug = `${(await params).slug.join("/")}`;
   const data = await loadPost(slug);
 
   if (!data) notFound();
-  // @ts-ignore
+
   return processMetadata(data);
 }

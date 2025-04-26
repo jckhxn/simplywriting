@@ -9,7 +9,7 @@ export default async function DynamicRoute({
 }: {
   params: { path: string[] };
 }) {
-  const pathname = `${params.path.join("")}`;
+  const pathname = await `${params.path.join("")}`;
   const data = await loadWork(pathname);
 
   return <SingleDocumentPreview data={data} />;

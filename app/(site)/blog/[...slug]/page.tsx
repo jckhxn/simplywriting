@@ -2,6 +2,8 @@ import { loadPost } from "@/sanity";
 import { notFound } from "next/navigation";
 import processMetadata from "@/lib/processMetadata";
 import { PostPage } from "@/app/(site)/components/sections/blog/post";
+import { loadQuery } from "@/sanity/loadQuery";
+import { POST_QUERY } from "@/sanity/queries";
 
 export default async function DynamicRoute({
   params,
@@ -11,7 +13,8 @@ export default async function DynamicRoute({
   // Join slug parts without leading '/'
 
   const slug = `${(await params).slug.join("/")}`;
-  const data = await loadPost(slug);
+
+  const data = await loadQuery({ query: POST_QUERY, params: { slug } });
 
   return (
     <>

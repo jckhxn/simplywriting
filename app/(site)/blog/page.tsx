@@ -4,10 +4,14 @@ import { loadPage } from "@/sanity";
 import processMetadata from "@/lib/processMetadata";
 import { notFound } from "next/navigation";
 import AllPosts from "../components/sections/blog/posts";
+import { loadQuery } from "@/sanity/loadQuery";
+import { PAGE_QUERY } from "@/sanity/queries";
 
 export async function generateMetadata() {
-  const data = await loadPage("/blog");
-
+  const data = await loadQuery({
+    query: PAGE_QUERY,
+    params: { pathname: "/blog" },
+  });
   if (!data) notFound();
 
   return processMetadata(data);

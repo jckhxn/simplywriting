@@ -47,9 +47,6 @@ const Hero = ({
 
                 <p className="text-lg md:text-xl text-foreground/80 max-w-md opacity-0 animate-fade-in animation-delay-300">
                   {body}
-                  Professional writing services tailored to your needs. From
-                  content creation to editing, we help you communicate with
-                  clarity and impact.
                 </p>
 
                 {/* CTAS GO HERE */}

@@ -6,7 +6,7 @@ import { PostPage } from "@/app/(site)/components/sections/blog/post";
 export default async function DynamicRoute({
   params,
 }: {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
 }) {
   // Join slug parts without leading '/'
 

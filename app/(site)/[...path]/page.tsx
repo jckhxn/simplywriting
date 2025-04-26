@@ -6,7 +6,7 @@ import processMetadata from "@/lib/processMetadata";
 export default async function DynamicRoute({
   params,
 }: {
-  params: { path: string[] };
+  params: Promise<{ path: string[] }>;
 }) {
   const pathname = `/${(await params).path.join("/")}`;
   const data = await loadPage(pathname);

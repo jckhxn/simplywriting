@@ -7,7 +7,7 @@ import processStructuredData from "@/lib/processStructuredData";
 import { loadSite } from "@/sanity";
 
 export interface PageProps {
-  data: PagePayload | SanityDocument;
+  data: PagePayload | SanityDocument | null;
 }
 // Prepare structured data for component.
 const structuredData = processStructuredData();

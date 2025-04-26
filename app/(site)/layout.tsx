@@ -14,6 +14,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const data = await loadSite();
+  
   const isDraftModeEnabled = (await draftMode()).isEnabled;
   return (
     <>

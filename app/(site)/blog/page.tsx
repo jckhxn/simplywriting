@@ -9,7 +9,7 @@ export async function generateMetadata() {
   const data = await loadPage("/blog");
 
   if (!data) notFound();
-  // @ts-ignore
+
   return processMetadata(data);
 }
 

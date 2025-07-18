@@ -1,10 +1,10 @@
 import Nav from "./nav";
-import { navbar2 } from "./navbar2";
+import { Navbar2 } from "./navbar2";
 import Footer from "./Footer";
 
 export const navs = {
   "nav.1": Nav,
-  "nav.2": navbar2,
+  "nav.2": Navbar2,
   "block.footer": Footer,
 };
 

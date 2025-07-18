@@ -58,36 +58,57 @@ export function contactForm({
   };
 
   return (
-    <section id={_key} className="py-24 px-6 md:px-10 bg-secondary/30">
-      <div className="container max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <span className="tag">Get in Touch</span>
-            <h2 className="section-title mt-3 mb-6">{title}</h2>
-            <p className="text-foreground/80 mb-8 max-w-md">{description}</p>
-
+    <section id={_key} className="py-16 px-6 md:px-10 bg-background">
+      <div className="container max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-12">
+          {/* Left Column - Contact Info */}
+          <div className="lg:col-span-1 space-y-8">
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary">
-                  <Mail size={18} />
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
+                <div className="w-2 h-2 bg-primary rounded-full"></div>
+                Get in Touch
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold">{title}</h2>
+              <p className="text-xl text-foreground/80">{description}</p>
+            </div>
+
+            {/* Contact Methods */}
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm text-foreground/60">Email</p>
-                  <p className="text-foreground">contact@simplywriting.net</p>
+                  <h3 className="font-semibold mb-1">Email</h3>
+                  <p className="text-foreground/70 text-sm">
+                    <a href={`mailto:${contactEmail || 'contact@simplywriting.net'}`} className="hover:text-primary transition-colors">
+                      {contactEmail || 'contact@simplywriting.net'}
+                    </a>
+                  </p>
+                  <p className="text-foreground/60 text-sm mt-1">Response within 24 hours</p>
                 </div>
               </div>
             </div>
+
+            {/* Response Time */}
+            <div className="bg-primary/5 rounded-lg p-6 border border-primary/20">
+              <h3 className="font-semibold text-primary mb-2">Quick Response</h3>
+              <p className="text-sm text-foreground/80">
+                I typically respond to project inquiries within 24 hours. For urgent requests, please mention it in your message.
+              </p>
+            </div>
           </div>
 
-          <div>
-            <form onSubmit={onSubmit} className="glass p-8 rounded-lg">
-              <div className="grid grid-cols-1 gap-y-5">
+          {/* Right Column - Contact Form */}
+          <div className="lg:col-span-2">
+            <form onSubmit={onSubmit} className="bg-muted/30 rounded-lg p-8 border border-border/50">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium text-foreground/80 mb-1"
+                    className="block text-sm font-medium text-foreground/80 mb-2"
                   >
-                    Name
+                    Name *
                   </label>
                   <input
                     type="text"
@@ -95,7 +116,7 @@ export function contactForm({
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary/40"
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-colors"
                     required
                   />
                   {errors.name && (
@@ -108,9 +129,9 @@ export function contactForm({
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium text-foreground/80 mb-1"
+                    className="block text-sm font-medium text-foreground/80 mb-2"
                   >
-                    Email
+                    Email *
                   </label>
                   <input
                     type="email"
@@ -118,7 +139,7 @@ export function contactForm({
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary/40"
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-colors"
                     required
                   />
                   {errors.email && (
@@ -128,22 +149,29 @@ export function contactForm({
                   )}
                 </div>
 
-                <div>
+                <div className="md:col-span-2">
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-medium text-foreground/80 mb-1"
+                    className="block text-sm font-medium text-foreground/80 mb-2"
                   >
-                    Subject
+                    Project Type
                   </label>
-                  <input
-                    type="text"
+                  <select
                     id="subject"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary/40"
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-colors"
                     required
-                  />
+                  >
+                    <option value="">Select a project type</option>
+                    <option value="Pitch Deck">Pitch Deck / Investor Presentation</option>
+                    <option value="Website Copy">Website Copy / Landing Pages</option>
+                    <option value="Content Strategy">Content Strategy</option>
+                    <option value="Technical Writing">Technical Documentation</option>
+                    <option value="Marketing Materials">Marketing Materials</option>
+                    <option value="Other">Other</option>
+                  </select>
                   {errors.subject && (
                     <p className="text-red-500 text-sm mt-1">
                       {errors.subject[0]}
@@ -151,20 +179,21 @@ export function contactForm({
                   )}
                 </div>
 
-                <div>
+                <div className="md:col-span-2">
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-foreground/80 mb-1"
+                    className="block text-sm font-medium text-foreground/80 mb-2"
                   >
-                    Message
+                    Project Details *
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={4}
+                    rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-hidden focus:ring-2 focus:ring-primary/40 resize-none"
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-colors resize-none"
+                    placeholder="Please describe your project, timeline, and any specific requirements..."
                     required
                   ></textarea>
                   {errors.message && (
@@ -174,14 +203,17 @@ export function contactForm({
                   )}
                 </div>
 
-                <button type="submit" className="button-primary mt-2">
-                  Send Message
-                </button>
+                <div className="md:col-span-2">
+                  <button type="submit" className="button-primary w-full md:w-auto">
+                    Send Project Inquiry
+                  </button>
+                </div>
               </div>
+              
               {statusMessage && (
-                <p className="text-center text-purple-500 mt-4 font-semibold">
-                  {statusMessage}
-                </p>
+                <div className="mt-6 p-4 bg-primary/10 text-primary rounded-lg">
+                  <p className="text-sm font-medium">{statusMessage}</p>
+                </div>
               )}
             </form>
           </div>

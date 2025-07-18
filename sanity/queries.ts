@@ -2,15 +2,35 @@
 import { groq } from "next-sanity";
 
 // Services query
-export const SERVICES_QUERY = groq`*[_type == "service"]`;
+export const SERVICES_QUERY = groq`*[_type == "service"] | order(order asc, _createdAt asc)`;
+
+// Testimonials query
+export const TESTIMONIALS_QUERY = groq`*[_type == "testimonial"] | order(order asc, _createdAt desc) {
+  name,
+  position,
+  company,
+  testimonial,
+  "image": image.asset->url,
+  featured,
+  order,
+  "project": project->{
+    title,
+    "slug": slug.current
+  }
+}`;
 // Feature Work query
-export const FEATURED_WORK_QUERY = groq`*[_type == "work" && isFeatured == true]
+export const FEATURED_WORK_QUERY = groq`*[_type == "work" && isFeatured == true] | order(_createdAt desc)
 {
    "image": image.asset->url,
     title,
     excerpt,
-     "slug": slug.current,
-         "category": category->title,
+    "slug": slug.current,
+    "category": category->title,
+    client,
+    timeline,
+    results,
+    projectType,
+    industry
 }`;
 // All Work query
 export const ALL_WORKS_QUERY = groq`{
@@ -88,33 +108,120 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current==$slug][0]{
 
 // All Posts query.
 export const POSTS_QUERY = groq` {
-  "posts": *[_type == "post"] | order(_createdAt desc) [$start...$end] {
+  "posts": *[_type == "post" && 
+    ($category == "" || category->title == $category)
+  ] | order(_createdAt desc) [$start...$end] {
     title,
-      description,
+    description,
     "slug": slug.current,
     "author": {
       "name": author->name,
       "image": author->image.asset->url
     },
     "image": image.asset->url,
-    "publishedDate": publishedDate
+    "publishedDate": publishedDate,
+    "category": category->title
   },
-  "total": count(*[_type == "post"])
+  "total": count(*[_type == "post" && 
+    ($category == "" || category->title == $category)
+  ]),
+  "categories": *[_type == "category"]{
+    title,
+    description
+  }
 }
 `;
-// Prepare Header
-export const HEADER_SECTION = groq`headerPicker[]{...,
-links[]{
+// Prepare Navigation Links
+export const NAVIGATION_LINKS = groq`
+  mainLinks[]{
+    ...,
+    link{
       ...,
-      link{
-      ...,
-        "internal": internal->{
+      "internal": internal->{
         ...,
-          pathname
-}}
-  }}`;
-// Prepare CTA links
-export const CTAs = groq`
+        pathname
+      }
+    }
+  },
+  ctaButtons[]{
+    ...,
+    link{
+      ...,
+      "internal": internal->{
+        ...,
+        pathname
+      }
+    }
+  }`;
+
+// Prepare Footer Links
+export const FOOTER_LINKS = groq`
+  quickLinks[]{
+    ...,
+    link{
+      ...,
+      "internal": internal->{
+        ...,
+        pathname
+      }
+    }
+  },
+  serviceLinks[]{
+    ...,
+    link{
+      ...,
+      "internal": internal->{
+        ...,
+        pathname
+      }
+    }
+  },
+  legalLinks[]{
+    ...,
+    link{
+      ...,
+      "internal": internal->{
+        ...,
+        pathname
+      }
+    }
+  }`;
+
+// Get Site info with singleton navigation and footer.
+export const SITE_QUERY = groq`*[_type == "site"][0] {
+    title,
+    description,
+    url,
+    companyName,
+    tagline,
+    email,
+    phone,
+    address,
+    socialMedia,
+    "ogimage": ogimage.asset->url,
+    navigation {
+      brandName,
+      "logo": logo.asset->url,
+      showBrandName,
+      stickyNavigation,
+      transparentOnTop,
+      ${NAVIGATION_LINKS}
+    },
+    footer {
+      companyDescription,
+      showContactInfo,
+      showSocialMedia,
+      copyrightText,
+      footerColumns,
+      ${FOOTER_LINKS}
+    }
+}`;
+// Gets Page based on current slug.
+export const PAGE_QUERY = groq`*[_type == "page" && pathname.current == $pathname][0]{
+  ...,
+  "globals":${SITE_QUERY},
+  sectionsBody[]{
+    ...,
     ctas[]{
       ...,
       link{
@@ -123,19 +230,8 @@ export const CTAs = groq`
         ...,
           pathname
         }
+      }
     }
-  },`;
-
-// Get Site info such as Header and Footer.
-export const SITE_QUERY = groq`*[_type == "site"][0] {
-    ...,${HEADER_SECTION}}`;
-// Gets Page based on current slug.
-export const PAGE_QUERY = groq`*[_type == "page" && pathname.current == $pathname][0]{
-  ...,
-  "globals":${SITE_QUERY},
-  sectionsBody[]{
-    ...,
-    ${CTAs}
   },
   "seo": {
     "title": coalesce(seo.title, title),  // Use seo.title or fallback to title

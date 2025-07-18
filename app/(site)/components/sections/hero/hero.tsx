@@ -22,66 +22,146 @@ const Hero = ({
     <ScrollReveal>
       <section
         id="TEST"
-        className="relative min-h-screen flex items-center justify-center pt-20 px-6 md:px-10 overflow-hidden"
+        className="relative min-h-[85vh] flex items-center pt-16 pb-12 px-6 md:px-10 bg-background"
       >
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-linear-to-r from-background to-background/40"></div>
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d')] bg-cover bg-center opacity-5"></div>
-        </div>
 
-        <div className="container max-w-6xl mx-auto z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
-              <div className="space-y-6">
-                <div className="opacity-0 animate-fade-in">
-                  <span className="tag animation-delay-100">
-                    Professional Writing Service
-                  </span>
+        <div className="container max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-5 gap-8 items-start">
+            {/* Main Content - Takes up 3 columns */}
+            <div className="lg:col-span-3 space-y-8">
+              {/* Client Photo & Professional Badge */}
+              <div className="flex items-center gap-6">
+                {/* Client Photo */}
+                <div className="relative flex-shrink-0 group">
+                  <div className="w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 ring-4 ring-primary/10">
+                    {image ? (
+                      <SanityImage
+                        data={image}
+                        className="w-full h-full object-cover"
+                        sizes="(max-width: 768px) 96px, (max-width: 1024px) 112px, 128px"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center">
+                        <span className="text-primary text-3xl md:text-4xl lg:text-5xl font-bold">
+                          {title?.charAt(0) || "J"}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-3 border-white shadow-md animate-pulse"></div>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
+                
+                {/* Professional Badge */}
+                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium shadow-sm">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                  Available for New Projects
+                </div>
+              </div>
 
-                <h1 className="section-title text-4xl md:text-5xl lg:text-6xl opacity-0 animate-fade-in animation-delay-200">
+              {/* Main Headline */}
+              <div className="space-y-4">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
                   {title}
-                  {/* Elevate Your Writing{" "}
-                  <span className="text-primary">Journey</span> */}
                 </h1>
-
-                <p className="text-lg md:text-xl text-foreground/80 max-w-md opacity-0 animate-fade-in animation-delay-300">
+                <p className="text-xl md:text-2xl text-foreground/70 leading-relaxed max-w-2xl">
                   {body}
                 </p>
+              </div>
 
-                {/* CTAS GO HERE */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-2 opacity-0 animate-fade-in animation-delay-400">
-                  <a href="#services" className="button-primary">
-                    Our Services
-                  </a>
-                  <a href="#contact" className="button-secondary">
-                    Get in Touch
-                  </a>
+              {/* Key Stats/Achievements */}
+              <div className="grid grid-cols-3 gap-6 py-6 border-y border-border/50">
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl md:text-3xl font-bold text-primary">500+</div>
+                  <div className="text-sm text-foreground/60">Projects Completed</div>
                 </div>
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl md:text-3xl font-bold text-primary">98%</div>
+                  <div className="text-sm text-foreground/60">Client Satisfaction</div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="text-2xl md:text-3xl font-bold text-primary">8+</div>
+                  <div className="text-sm text-foreground/60">Years Experience</div>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a 
+                  href="#portfolio" 
+                  className="button-primary"
+                >
+                  View My Work
+                </a>
+                <a 
+                  href="#contact" 
+                  className="button-secondary"
+                >
+                  Start a Project
+                </a>
               </div>
             </div>
 
-            <div className="order-1 md:order-2 opacity-0 animate-fade-in animation-delay-300 flex flex-col items-center">
-              {/* Profile Image - Properly styled as circular */}
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white shadow-xl mb-8">
-                <SanityImage
-                  data={image}
-                  className="w-full h-full object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 75vw, (max-width: 1024px) 66vw, 50vw"
-                />
+            {/* Right Sidebar - Portfolio Preview */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Featured Work */}
+              <div className="bg-muted/50 rounded-lg p-6 border border-border/50">
+                <h3 className="text-lg font-semibold mb-4">Featured Work</h3>
+                <div className="space-y-4">
+                  <div className="border-l-3 border-primary pl-4">
+                    <h4 className="font-medium text-foreground/90">Tech Startup Series A Pitch Deck</h4>
+                    <p className="text-sm text-foreground/60 mt-1">Helped secure $12M in funding with compelling narrative</p>
+                  </div>
+                  <div className="border-l-3 border-primary pl-4">
+                    <h4 className="font-medium text-foreground/90">Fortune 500 Annual Report</h4>
+                    <p className="text-sm text-foreground/60 mt-1">Transformed complex data into engaging shareholder story</p>
+                  </div>
+                  <div className="border-l-3 border-primary pl-4">
+                    <h4 className="font-medium text-foreground/90">Healthcare SaaS Website Copy</h4>
+                    <p className="text-sm text-foreground/60 mt-1">Increased conversion rate by 340% with targeted messaging</p>
+                  </div>
+                </div>
               </div>
 
-              {/* Quote Card - Positioned cleanly below the image */}
-              <div className="glass w-full max-w-md p-6 rounded-lg">
-                <blockquote className="text-center italic text-foreground/80">
-                  <p className="text-lg md:text-xl">
-                    "The art of writing is the art of discovering what you
-                    believe."
-                  </p>
-                  <footer className="mt-2 text-sm font-medium text-foreground">
-                    — Gustave Flaubert
-                  </footer>
+              {/* Services Overview */}
+              <div className="bg-muted/50 rounded-lg p-6 border border-border/50">
+                <h3 className="text-lg font-semibold mb-4">Core Services</h3>
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Pitch Decks</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Website Copy</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Annual Reports</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Content Strategy</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Brand Messaging</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Technical Writing</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Client Testimonial */}
+              <div className="bg-primary/5 rounded-lg p-6 border border-primary/20">
+                <blockquote className="text-sm italic text-foreground/80 mb-3">
+                  "Working with this writer transformed our funding pitch completely. Clear, compelling, and results-driven."
                 </blockquote>
+                <div className="text-xs text-foreground/60">
+                  — Sarah Chen, CEO at TechFlow Analytics
+                </div>
               </div>
             </div>
           </div>

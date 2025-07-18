@@ -173,7 +173,7 @@ layer(base);
 }
 
 @utility section-title {
-  @apply text-2xl md:text-3xl lg:text-4xl font-display font-semibold tracking-tight;
+  @apply text-2xl md:text-3xl lg:text-4xl font-display font-bold tracking-tight leading-tight;
 }
 
 @utility tag {
@@ -181,15 +181,15 @@ layer(base);
 }
 
 @utility glass {
-  @apply bg-white/70 backdrop-blur-lg shadow-xs border border-white/20;
+  @apply bg-white/80 backdrop-blur-xl shadow-lg border border-white/30 backdrop-saturate-150;
 }
 
 @utility button-primary {
-  @apply bg-primary text-primary-foreground rounded-md px-4 py-2 inline-flex items-center justify-center font-medium transition-all duration-200 hover:bg-primary/90 focus:outline-hidden focus:ring-2 focus:ring-primary/40 focus:ring-offset-2;
+  @apply bg-primary text-primary-foreground rounded-lg px-6 py-3 inline-flex items-center justify-center font-semibold transition-all duration-300 hover:bg-primary/90 hover:shadow-lg focus:outline-hidden focus:ring-2 focus:ring-primary/40 focus:ring-offset-2 active:scale-95 relative overflow-hidden;
 }
 
 @utility button-secondary {
-  @apply bg-secondary text-secondary-foreground rounded-md px-4 py-2 inline-flex items-center justify-center font-medium transition-all duration-200 hover:bg-secondary/80 focus:outline-hidden focus:ring-2 focus:ring-secondary/40 focus:ring-offset-2;
+  @apply bg-secondary text-secondary-foreground rounded-lg px-6 py-3 inline-flex items-center justify-center font-semibold transition-all duration-300 hover:bg-secondary/80 hover:shadow-lg focus:outline-hidden focus:ring-2 focus:ring-secondary/40 focus:ring-offset-2 active:scale-95 border border-border/50 hover:border-border;
 }
 
 @utility text-balance {

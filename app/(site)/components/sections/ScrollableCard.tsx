@@ -1,130 +1,217 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { useRef, useEffect, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
 import { Card } from "@/app/(site)/components/ui/card";
-import Image from "next/image";
-const testimonials = [
-  { id: 1, text: "Testimonial 1" },
-  { id: 2, text: "Testimonial 2" },
-  { id: 3, text: "Testimonial 3" },
-  { id: 4, text: "Testimonial 1" },
-  { id: 5, text: "Testimonial 2" },
-  { id: 6, text: "Testimonial 3" },
-  // Add more testimonials as needed
+import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { Avatar, AvatarFallback } from "@/app/(site)/components/ui/avatar";
+import ScrollReveal from "../ScrollReveal";
+
+const clientTestimonials = [
+  {
+    id: 1,
+    quote: "The pitch deck completely transformed our funding approach. We secured $12M in Series A funding.",
+    name: "Sarah Chen",
+    title: "CEO, TechFlow Analytics",
+    result: "$12M Series A Raised",
+    avatar: "SC"
+  },
+  {
+    id: 2,
+    quote: "Website conversion increased by 340% after the messaging overhaul. ROI was immediate.",
+    name: "Michael Rodriguez",
+    title: "VP Marketing, HealthTech Solutions",
+    result: "340% Conversion Increase",
+    avatar: "MR"
+  },
+  {
+    id: 3,
+    quote: "Product documentation is now crystal clear. Customer support tickets dropped by 60%.",
+    name: "Amanda Foster",
+    title: "Founder, GreenSpace Co.",
+    result: "60% Fewer Support Tickets",
+    avatar: "AF"
+  },
+  {
+    id: 4,
+    quote: "Content strategy revolutionized our lead generation. Qualified leads up 85% month-over-month.",
+    name: "Robert Zhang",
+    title: "Marketing Director, CloudSoft",
+    result: "85% Lead Generation Growth",
+    avatar: "RZ"
+  },
+  {
+    id: 5,
+    quote: "Brand messaging is now consistent across all markets. Unified voice across 15 countries.",
+    name: "Lisa Thompson",
+    title: "Head of Communications, ManufacturingPro",
+    result: "15 Markets Unified",
+    avatar: "LT"
+  },
+  {
+    id: 6,
+    quote: "Annual report writing was exceptional. 98% shareholder approval on strategic direction.",
+    name: "David Kim",
+    title: "Chief Strategy Officer, FinanceForward",
+    result: "98% Shareholder Approval",
+    avatar: "DK"
+  }
 ];
 
-export default function TestimonialCarousel({ _key }) {
-  const controlsArray = testimonials.map(() => useAnimation());
-  const refsArray = testimonials.map(() => useRef(null));
-  const [visibleCards, setVisibleCards] = useState(new Set());
+export default function ClientSuccessCarousel({ _key }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const carouselRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const index = refsArray.findIndex(
-            (ref) => ref.current === entry.target
-          );
-          if (entry.isIntersecting) {
-            visibleCards.add(index);
-          } else {
-            visibleCards.delete(index);
-          }
-          setVisibleCards(new Set(visibleCards));
-        });
-      },
-      {
-        root: null,
-        threshold: 0.5, // Adjust the threshold as needed
-      }
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === clientTestimonials.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === clientTestimonials.length - 1 ? 0 : prevIndex + 1
     );
+  };
 
-    refsArray.forEach((ref) => {
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
-    });
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? clientTestimonials.length - 1 : prevIndex - 1
+    );
+  };
 
-    return () => {
-      refsArray.forEach((ref) => {
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
-      });
-    };
-  }, []);
-
-  useEffect(() => {
-    visibleCards.forEach((index) => {
-      controlsArray[index].start("visible");
-    });
-    controlsArray.forEach((controls, index) => {
-      if (!visibleCards.has(index)) {
-        controls.start("hidden");
-      }
-    });
-  }, [visibleCards, controlsArray]);
-
-  const variants = {
-    visible: { opacity: 1, transition: { duration: 0.5 } },
-    hidden: { opacity: 0.3, transition: { duration: 0.5 } }, // Adjusted opacity for the hidden state
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
   };
 
   return (
-    <>
-      <div id={_key} className="text-md">
-        Smol placeholder text
-      </div>
-      <div className="text-3xl">Trusted by professionals</div>
-
-      {/* Start Card Carousel */}
-      <div className="flex  flex-row  snap-x snap-mandatory items-center justify-center  overflow-x-auto overscroll-contain  ">
-        {testimonials.map((testimonial, index) => (
-          <div
-            key={testimonial.id}
-            ref={refsArray[index]}
-            className="w-full h-full"
-          >
-            <motion.div
-              initial="hidden"
-              animate={controlsArray[index]}
-              variants={variants}
-              className="w-full h-full"
-            >
-              <ScrollCard />
-            </motion.div>
+    <ScrollReveal>
+      <section id={_key} className="py-16 px-6 md:px-10 bg-background">
+        <div className="container max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-4">
+              <div className="w-2 h-2 bg-primary rounded-full"></div>
+              Client Success Stories
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Trusted by Industry Leaders
+            </h2>
+            <p className="text-xl text-foreground/80">
+              Real results from companies who've transformed their communications with professional writing services.
+            </p>
           </div>
-        ))}
-      </div>
-      <div className="">
-        Join professionsals who trust BarelyHR for hiring and onboarding new
-        employees.
-      </div>
-      <div className="text-pink-500">Get started -&gt; </div>
-    </>
+
+          {/* Carousel Container */}
+          <div 
+            className="relative"
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+          >
+            <div className="overflow-hidden rounded-lg">
+              <div
+                ref={carouselRef}
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              >
+                {clientTestimonials.map((testimonial) => (
+                  <div key={testimonial.id} className="w-full flex-shrink-0">
+                    <ClientSuccessCard testimonial={testimonial} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border/50 rounded-full p-2 hover:bg-background transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5 text-foreground/80" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border/50 rounded-full p-2 hover:bg-background transition-colors"
+            >
+              <ChevronRight className="w-5 h-5 text-foreground/80" />
+            </button>
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {clientTestimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-3 h-3 rounded-full transition-colors ${
+                  index === currentIndex ? 'bg-primary' : 'bg-border/50'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center mt-12 pt-8 border-t border-border/50">
+            <p className="text-lg text-foreground/80 mb-4">
+              Ready to achieve similar results for your business?
+            </p>
+            <a
+              href="#contact"
+              className="button-primary inline-flex items-center"
+            >
+              Start Your Project
+            </a>
+          </div>
+        </div>
+      </section>
+    </ScrollReveal>
   );
 }
 
-export const ScrollCard = ({ image, quote, title, name }) => {
+export const ClientSuccessCard = ({ testimonial }) => {
   return (
-    <Card className="bg-white rounded-lg overflow-hidden relative w-56 sm:w-64 md:w-72 lg:w-72 xl:w-72">
-      <div className="relative">
-        <img src="placeholder.avif" alt="Person" className="w-full" />
-        {/* Bottom half gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-b from-transparent to-black opacity-90"></div>
-        <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black to-transparent p-4">
-          <p className="text-white text-sm italic">
-            "BarelyHR made onboarding our new remote employees an absolute
-            breeze."
-          </p>
+    <Card className="bg-muted/30 border border-border/50 p-8 md:p-12">
+      <div className="max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 items-center">
+          {/* Quote Section */}
+          <div className="md:col-span-2 space-y-6">
+            <Quote className="w-8 h-8 text-primary/60" />
+            <blockquote className="text-xl md:text-2xl font-medium text-foreground/90 italic leading-relaxed">
+              "{testimonial.quote}"
+            </blockquote>
+            
+            {/* Author Info */}
+            <div className="flex items-center gap-4">
+              <Avatar className="w-12 h-12 border-2 border-primary/20">
+                <AvatarFallback className="bg-primary/10 text-primary font-semibold">
+                  {testimonial.avatar}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <div className="font-semibold text-lg">{testimonial.name}</div>
+                <div className="text-foreground/60">{testimonial.title}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Results Section */}
+          <div className="md:col-span-1">
+            <div className="bg-primary/5 rounded-lg p-6 border border-primary/20">
+              <div className="text-center">
+                <div className="text-sm text-primary font-medium mb-2">Key Result</div>
+                <div className="text-2xl font-bold text-primary mb-2">{testimonial.result}</div>
+                <div className="text-sm text-foreground/60">
+                  Achieved through strategic content development
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="bg-black p-4">
-        <p className="text-white font-semibold">Jack Hoff</p>
-        <p className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-purple-600">
-          Head of Marketing, TaxPad
-        </p>
       </div>
     </Card>
   );

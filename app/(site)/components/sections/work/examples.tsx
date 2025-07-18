@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, TrendingUp, Users, DollarSign } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { loadFeaturedWorks } from "@/sanity";
 import ScrollReveal from "../../ScrollReveal";
@@ -14,6 +14,9 @@ interface WorkItemProps {
   ctas?: any;
   className?: string;
   _type?: string;
+  results?: string;
+  client?: string;
+  timeline?: string;
 }
 
 const WorkItem = ({
@@ -22,41 +25,56 @@ const WorkItem = ({
   category,
   image,
   slug,
+  results,
+  client,
+  timeline,
   className,
 }: WorkItemProps) => {
   return (
-    <div
+    <a
+      href={`/work/${slug}`}
       className={cn(
-        "group bg-white rounded-lg overflow-hidden border border-border/50 hover:shadow-md transition-all duration-300 opacity-0 animate-fade-in",
+        "group bg-background rounded-lg border border-border/50 hover:border-primary/30 transition-colors cursor-pointer block",
         className
       )}
-      style={{ animationPlayState: "paused" }}
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      <div className="aspect-video w-full overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-      <div className="p-6">
-        <div className="flex flex-wrap gap-2 mb-3">
-          <span className="text-xs bg-secondary text-foreground/80 px-2 py-0.5 rounded-full">
-            {category}
-          </span>
+      <div className="p-6 space-y-4">
+        {/* Header */}
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium">
+                {category}
+              </span>
+              {timeline && (
+                <span className="text-xs text-foreground/60">{timeline}</span>
+              )}
+            </div>
+            <h3 className="text-lg font-semibold mb-1 group-hover:text-primary transition-colors">
+              {title}
+            </h3>
+            {client && (
+              <p className="text-sm text-foreground/60 mb-2">{client}</p>
+            )}
+          </div>
+          <ArrowUpRight className="w-5 h-5 text-foreground/40 group-hover:text-primary transition-colors" />
         </div>
-        <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-foreground/80 mb-4">{excerpt}</p>
-        <a
-          href={`/writing/${slug}`}
-          className="inline-flex items-center text-primary font-medium hover:underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View project <ArrowUpRight size={16} className="ml-1" />
-        </a>
+
+        {/* Description */}
+        <p className="text-foreground/80 text-sm leading-relaxed">{excerpt}</p>
+
+        {/* Results */}
+        {results && (
+          <div className="flex items-center gap-2 pt-2 border-t border-border/30">
+            <TrendingUp className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-primary">{results}</span>
+          </div>
+        )}
+
       </div>
-    </div>
+    </a>
   );
 };
 
@@ -67,40 +85,73 @@ interface FeaturedWorkProps {
 }
 
 export default async function FeaturedWork({
-  heading,
-  subheading,
+  heading = "Featured Work & Results",
+  subheading = "Real projects that delivered measurable business impact for clients across industries.",
   _type,
 }: FeaturedWorkProps) {
   const featuredWorks = await loadFeaturedWorks();
 
-  // Fallback projects if no featured works are loaded
+  // Enhanced fallback projects with results and client info
   const fallbackProjects = [
     {
-      title: "TechSolutions Website Redesign",
-      excerpt:
-        "Complete content overhaul and copywriting for a tech company's website, increasing conversion by 40%.",
-      category: "Web Content",
-      image:
-        "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80",
-      slug: "tech-solutions-redesign",
+      title: "Series A Pitch Deck",
+      excerpt: "Comprehensive investor presentation for AI healthcare startup seeking $15M Series A funding.",
+      category: "Pitch Deck",
+      client: "HealthTech AI Inc.",
+      timeline: "2 weeks",
+      results: "$12M raised (80% of target)",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80",
+      slug: "series-a-pitch-deck",
     },
     {
-      title: "Academic Research Paper",
-      excerpt:
-        "Editing and proofreading services for a groundbreaking research paper published in a prominent journal.",
-      category: "Academic",
-      image:
-        "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80",
-      slug: "academic-research-paper",
+      title: "SaaS Homepage Redesign",
+      excerpt: "Complete messaging overhaul for B2B software company's homepage and key landing pages.",
+      category: "Website Copy",
+      client: "CloudFlow Solutions",
+      timeline: "3 weeks",
+      results: "340% conversion increase",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
+      slug: "saas-homepage-redesign",
     },
     {
-      title: "Corporate Communication Strategy",
-      excerpt:
-        "Development of internal and external communication materials for a Fortune 500 company.",
-      category: "Corporate",
-      image:
-        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80",
-      slug: "corporate-communication",
+      title: "Annual Report Writing",
+      excerpt: "Executive communications and financial storytelling for public company's annual shareholder report.",
+      category: "Executive Comms",
+      client: "Manufacturing Corp",
+      timeline: "6 weeks",
+      results: "98% shareholder approval",
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80",
+      slug: "annual-report-writing",
+    },
+    {
+      title: "Product Documentation",
+      excerpt: "Technical writing and API documentation for enterprise software platform used by 50,000+ developers.",
+      category: "Technical Writing",
+      client: "DevTools Platform",
+      timeline: "4 weeks",
+      results: "60% reduction in support tickets",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80",
+      slug: "product-documentation",
+    },
+    {
+      title: "Content Strategy & SEO",
+      excerpt: "Comprehensive content marketing strategy and blog content creation for fintech startup.",
+      category: "Content Strategy",
+      client: "FinanceForward",
+      timeline: "8 weeks",
+      results: "285% organic traffic growth",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80",
+      slug: "content-strategy-seo",
+    },
+    {
+      title: "Brand Messaging Framework",
+      excerpt: "Complete brand voice and messaging architecture for scaling e-commerce platform.",
+      category: "Brand Strategy",
+      client: "E-commerce Co",
+      timeline: "5 weeks",
+      results: "Unified brand voice across 15 markets",
+      image: "https://images.unsplash.com/photo-1556155092-8707de31f9c4?auto=format&fit=crop&q=80",
+      slug: "brand-messaging-framework",
     },
   ];
 
@@ -110,30 +161,45 @@ export default async function FeaturedWork({
 
   return (
     <ScrollReveal>
-      <section id={_type} className="py-24 px-6 md:px-10">
-        <div className="container max-w-6xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span
-              className="tag opacity-0 animate-fade-in"
-              style={{ animationPlayState: "paused" }}
-            >
+      <section id={_type} className="py-16 px-6 md:px-10 bg-muted/20">
+        <div className="container max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium mb-4">
+              <div className="w-2 h-2 bg-primary rounded-full"></div>
               Portfolio
-            </span>
-            <h2
-              className="section-title mt-3 mb-4 opacity-0 animate-fade-in animation-delay-100"
-              style={{ animationPlayState: "paused" }}
-            >
-              {heading}
-            </h2>
-            <p
-              className="text-foreground/80 opacity-0 animate-fade-in animation-delay-200"
-              style={{ animationPlayState: "paused" }}
-            >
-              {subheading}
-            </p>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
+            <p className="text-xl text-foreground/80">{subheading}</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          {/* Results Summary */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div className="bg-background rounded-lg p-6 border border-border/50 text-center">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <DollarSign className="w-5 h-5 text-primary" />
+                <span className="text-2xl font-bold text-primary">$50M+</span>
+              </div>
+              <div className="text-sm text-foreground/60">Total Funding Secured</div>
+            </div>
+            <div className="bg-background rounded-lg p-6 border border-border/50 text-center">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <TrendingUp className="w-5 h-5 text-primary" />
+                <span className="text-2xl font-bold text-primary">2.8x</span>
+              </div>
+              <div className="text-sm text-foreground/60">Average Conversion Lift</div>
+            </div>
+            <div className="bg-background rounded-lg p-6 border border-border/50 text-center">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Users className="w-5 h-5 text-primary" />
+                <span className="text-2xl font-bold text-primary">50+</span>
+              </div>
+              <div className="text-sm text-foreground/60">Companies Served</div>
+            </div>
+          </div>
+
+          {/* Work Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projectsToDisplay?.map((work, index) => (
               <WorkItem
                 key={work.slug || index}
@@ -142,7 +208,9 @@ export default async function FeaturedWork({
                 category={work.category}
                 image={work.image}
                 slug={work.slug}
-                className={`animation-delay-${(index + 1) * 100}`}
+                results={work.results}
+                client={work.client}
+                timeline={work.timeline}
               />
             ))}
           </div>

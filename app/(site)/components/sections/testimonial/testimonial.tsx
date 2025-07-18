@@ -7,8 +7,9 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/app/(site)/components/ui/avatar";
-import { Quote } from "lucide-react";
+import { Quote, TrendingUp } from "lucide-react";
 import { SanityImage } from "../../SanityImage";
+import ScrollReveal from "../../ScrollReveal";
 
 type TestimonialProps = {
   image: any;
@@ -17,53 +18,77 @@ type TestimonialProps = {
   position: string;
   testimonial: string;
   _key: string;
+  result?: string;
 };
 
 export default function TestimonialSection({
   _key,
   image,
   isRight,
-  name = "John Doe",
-  position = "CEO of Company",
-  testimonial = "Molestie vivamus at sed massa at purus scelerisque egestas quis non augue hac massa rhoncus, nec nunc consequat cras diam tristique rhoncus et vitae.",
+  name = "Sarah Chen",
+  position = "CEO, TechFlow Analytics",
+  testimonial = "The pitch deck completely transformed our funding approach. We secured $12M in Series A funding, largely due to the compelling narrative and clear value proposition.",
+  result = "$12M Series A Raised",
 }: TestimonialProps) {
   return (
-    <section
-      id={_key}
-      className="bg-linear-to-br from-purple-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8"
-    >
-      <Card className="max-w-lg mx-auto">
-        <CardContent className="p-8 sm:p-12">
-          <div
-            className={`flex flex-col ${
-              isRight ? "lg:flex-row-reverse" : "lg:flex-row"
-            } items-center gap-8`}
-          >
-            <div className="w-full lg:w-1/3">
-              <Avatar className="w-56 h-56 rounded-full mx-auto lg:mx-0">
-                <SanityImage
-                  data={image}
-                  className="object-cover w-full h-full transition-transform duration-300 hover:scale-110"
-                  sizes="(max-width: 1024px) 100vw, 400px"
-                />
-                <AvatarFallback>{name.charAt(0)}</AvatarFallback>
-              </Avatar>
-            </div>
-            <div className="w-full lg:w-2/3 space-y-4">
-              <Quote className="text-primary w-10 h-10 mb-4" />
-              <blockquote className="text-xl font-medium text-foreground italic">
-                "{testimonial}"
-              </blockquote>
-              <div className="mt-4">
-                <cite className="not-italic">
-                  <span className="font-semibold text-lg block">{name}</span>
-                  <span className="text-muted-foreground">{position}</span>
-                </cite>
+    <ScrollReveal>
+      <section
+        id={_key}
+        className="py-16 px-6 md:px-10 bg-muted/30"
+      >
+        <div className="container max-w-6xl mx-auto">
+          <Card className="bg-background border border-border/50 overflow-hidden">
+            <CardContent className="p-8 md:p-12">
+              <div
+                className={`grid lg:grid-cols-3 gap-8 items-center ${
+                  isRight ? "lg:grid-flow-col-reverse" : ""
+                }`}
+              >
+                {/* Avatar Section */}
+                <div className="lg:col-span-1 text-center">
+                  <Avatar className="w-24 h-24 md:w-32 md:h-32 mx-auto border-4 border-primary/20">
+                    <SanityImage
+                      data={image}
+                      className="object-cover w-full h-full"
+                      sizes="(max-width: 768px) 96px, 128px"
+                    />
+                    <AvatarFallback className="bg-primary/10 text-primary text-xl md:text-2xl">
+                      {name.charAt(0)}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="mt-4">
+                    <div className="font-semibold text-lg">{name}</div>
+                    <div className="text-foreground/60 text-sm">{position}</div>
+                  </div>
+                </div>
+
+                {/* Content Section */}
+                <div className="lg:col-span-2 space-y-6">
+                  <div className="flex items-start gap-2">
+                    <Quote className="text-primary w-6 h-6 flex-shrink-0 mt-1" />
+                    <blockquote className="text-xl md:text-2xl font-medium text-foreground/90 italic leading-relaxed">
+                      "{testimonial}"
+                    </blockquote>
+                  </div>
+                  
+                  {/* Result Card */}
+                  {result && (
+                    <div className="bg-primary/5 rounded-lg p-6 border border-primary/20">
+                      <div className="flex items-center gap-3">
+                        <TrendingUp className="w-6 h-6 text-primary" />
+                        <div>
+                          <div className="text-sm text-primary font-medium mb-1">Key Result</div>
+                          <div className="text-lg font-bold text-primary">{result}</div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </section>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+    </ScrollReveal>
   );
 }

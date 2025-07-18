@@ -4,7 +4,11 @@ testimonials
 contact
 footer
 
+# Walk through registering a component and fetching documents pertaining to that doc
+
 # Fixes, Additions
+
+Global Settings implementation
 Footer needs to display links, company, etc properly
 Fix Resend (If localhost isnt problem)
 

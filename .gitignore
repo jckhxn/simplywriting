@@ -3,3 +3,5 @@ node_modules/
 .vercel
 .env
 .cursorrules
+# Cursor files wildcard for now
+*.md

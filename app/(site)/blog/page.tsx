@@ -25,6 +25,7 @@ export default async function IndexRoute({
   searchParams: { [key: string]: string | string[] };
 }) {
   const page = parseInt(searchParams["page"] as string, 10) || 1; // Defaults to 1 if not provided
+  const category = searchParams["category"] as string || "";
 
-  return <AllPosts page={page} />;
+  return <AllPosts page={page} category={category} />;
 }

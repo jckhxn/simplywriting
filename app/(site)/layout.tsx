@@ -5,15 +5,17 @@ import { revalidatePath, revalidateTag } from "next/cache";
 
 import { draftMode } from "next/headers";
 import { loadSite } from "@/sanity";
-import { NavRenderer } from "@/app/(site)/components/navigation";
+import { Navbar2 } from "@/app/(site)/components/navigation/navbar2";
+import Footer from "@/app/(site)/components/navigation/Footer";
 import { SanityLive } from "@/sanity/live";
+import type { SitePayload } from "@/types";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data = await loadSite();
+  const data = await loadSite() as SitePayload;
   
   const isDraftModeEnabled = (await draftMode()).isEnabled;
   return (
@@ -21,15 +23,11 @@ export default async function RootLayout({
       <html lang="en">
         <body>
           {/* Header is rendered from global document. */}
-          {data?.headerPicker?.map((nav) => {
-            return <NavRenderer key={nav._key} nav={nav} />;
-          })}
+          {data?.navigation && <Navbar2 navigation={data.navigation} />}
 
           {children}
           {/* Footer is rendered from global document. */}
-          {data?.footerPicker?.map((nav) => {
-            return <NavRenderer key={nav._key} nav={nav} />;
-          })}
+          {data && <Footer site={data} />}
 
           {/* <SanityLive />  */}
           {isDraftModeEnabled && (

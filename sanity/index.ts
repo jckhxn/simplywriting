@@ -1,4 +1,4 @@
-import { PagePayload } from "@/types";
+import { PagePayload, SitePayload } from "@/types";
 import { loadQuery } from "./loadQuery";
 import {
   PAGE_QUERY,
@@ -9,11 +9,12 @@ import {
   WORK_QUERY,
   FEATURED_WORK_QUERY,
   SERVICES_QUERY,
+  TESTIMONIALS_QUERY,
 } from "./queries";
 
 // Site Global Settings, such as Header and Footer.
 export async function loadSite(query?: any) {
-  return loadQuery<PagePayload | null>({
+  return loadQuery<SitePayload | null>({
     query: query ? query : SITE_QUERY,
   });
 }
@@ -31,13 +32,13 @@ export async function loadPost(slug: string) {
     params: { slug },
   });
 }
-export async function loadPosts(page: number, postsPerPage: number) {
+export async function loadPosts(page: number, postsPerPage: number, category?: string) {
   // Handles the math for pagination.
   const start = (page - 1) * postsPerPage;
   const end = start + postsPerPage;
   return loadQuery<PagePayload | null>({
     query: POSTS_QUERY,
-    params: { start, end },
+    params: { start, end, category: category || "" },
   });
 }
 
@@ -73,5 +74,11 @@ export async function loadFeaturedWorks() {
 export async function loadServices() {
   return loadQuery<PagePayload | null>({
     query: SERVICES_QUERY,
+  });
+}
+
+export async function loadTestimonials() {
+  return loadQuery<PagePayload | null>({
+    query: TESTIMONIALS_QUERY,
   });
 }

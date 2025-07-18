@@ -103,7 +103,7 @@ export default function ClientSuccessCarousel({ _key }) {
               Trusted by Industry Leaders
             </h2>
             <p className="text-xl text-foreground/80">
-              Real results from companies who've transformed their communications with professional writing services.
+              Real results from companies who&apos;ve transformed their communications with professional writing services.
             </p>
           </div>
 
@@ -182,7 +182,7 @@ export const ClientSuccessCard = ({ testimonial }) => {
           <div className="md:col-span-2 space-y-6">
             <Quote className="w-8 h-8 text-primary/60" />
             <blockquote className="text-xl md:text-2xl font-medium text-foreground/90 italic leading-relaxed">
-              "{testimonial.quote}"
+              &quot;{testimonial.quote}&quot;
             </blockquote>
             
             {/* Author Info */}

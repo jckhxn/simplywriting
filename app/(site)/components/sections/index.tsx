@@ -6,7 +6,7 @@ import services from "./services/services";
 import TestimonialSection from "./testimonial/testimonial";
 import AboutSection from "./about/about";
 import AllPosts from "./blog/posts";
-import { contactForm } from "./contact/contact-form";
+import { ContactForm } from "./contact/contact-form";
 import WorkExamples from "./work/examples";
 import SocialProof from "./testimonials/testimonials";
 import Benefits from "./benefits/benefits";
@@ -25,7 +25,7 @@ export const sections: Record<string, FC<any>> = {
   "section.testimonials": SocialProof,
   "section.benefits": Benefits,
   "section.blog.allposts": AllPosts,
-  "section.forms.contact": contactForm,
+  "section.forms.contact": ContactForm,
   "section.workexamples": WorkExamples,
 };
 

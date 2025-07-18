@@ -11,7 +11,7 @@ interface ContactFormProps {
   contactEmail: string; // This is the email address where the form data will be sent.
 }
 
-export function contactForm({
+export function ContactForm({
   _key,
   title = "Get in touch",
   description = "We'd love to hear from you. Fill out the form below and we'll get back to you shortly.",

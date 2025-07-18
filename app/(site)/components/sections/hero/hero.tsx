@@ -157,7 +157,7 @@ const Hero = ({
               {/* Client Testimonial */}
               <div className="bg-primary/5 rounded-lg p-6 border border-primary/20">
                 <blockquote className="text-sm italic text-foreground/80 mb-3">
-                  "Working with this writer transformed our funding pitch completely. Clear, compelling, and results-driven."
+                  &quot;Working with this writer transformed our funding pitch completely. Clear, compelling, and results-driven.&quot;
                 </blockquote>
                 <div className="text-xs text-foreground/60">
                   — Sarah Chen, CEO at TechFlow Analytics

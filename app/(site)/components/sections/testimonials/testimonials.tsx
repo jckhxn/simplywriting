@@ -99,7 +99,7 @@ export default async function Testimonials({
                 
                 {/* Testimonial Text */}
                 <blockquote className="text-foreground/80 text-base leading-relaxed mb-6">
-                  "{testimonial.testimonial}"
+                  &quot;{testimonial.testimonial}&quot;
                 </blockquote>
                 
                 {/* Author Info */}

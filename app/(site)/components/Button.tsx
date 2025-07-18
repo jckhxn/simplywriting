@@ -12,9 +12,9 @@ export default function Button({
   children,
   // @ts-ignore
 }: Sanity.CTA & React.HTMLAttributes<HTMLAnchorElement>) {
-  if (!link?.type) return null;
-
   const pathname = usePathname();
+  
+  if (!link?.type) return null;
   
   // Check if this link is active (matches current pathname)
   const isActive = link.type === "internal" && 

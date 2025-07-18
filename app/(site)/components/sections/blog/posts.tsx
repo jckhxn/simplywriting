@@ -234,7 +234,7 @@ export default async function AllPosts({ page, category }: { page: number; categ
             </h2>
             <p className="text-foreground/80 mb-8 leading-relaxed">
               Apply the insights from these articles to your business. Professional writing services 
-              that deliver the results you've read about in these case studies.
+              that deliver the results you&apos;ve read about in these case studies.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

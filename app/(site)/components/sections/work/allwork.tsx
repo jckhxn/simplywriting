@@ -246,8 +246,8 @@ export default async function WritingWorkPage({
               Ready to Create Your Next Success Story?
             </h2>
             <p className="text-foreground/80 mb-8 leading-relaxed">
-              Let's discuss how professional writing can help you achieve your business goals. 
-              From pitch decks to website copy, I'll create content that delivers results.
+              Let&apos;s discuss how professional writing can help you achieve your business goals. 
+              From pitch decks to website copy, I&apos;ll create content that delivers results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

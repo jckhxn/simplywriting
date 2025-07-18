@@ -229,7 +229,7 @@ export default async function Services({
                   Ready to Transform Your Content Strategy?
                 </h3>
                 <p className="text-foreground/70 max-w-2xl mx-auto">
-                  Let's create compelling content that drives real business
+                  Let&apos;s create compelling content that drives real business
                   results. From pitch decks that secure funding to websites that
                   convert visitors.
                 </p>

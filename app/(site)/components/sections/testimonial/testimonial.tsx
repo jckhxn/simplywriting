@@ -67,7 +67,7 @@ export default function TestimonialSection({
                   <div className="flex items-start gap-2">
                     <Quote className="text-primary w-6 h-6 flex-shrink-0 mt-1" />
                     <blockquote className="text-xl md:text-2xl font-medium text-foreground/90 italic leading-relaxed">
-                      "{testimonial}"
+                      &quot;{testimonial}&quot;
                     </blockquote>
                   </div>
                   

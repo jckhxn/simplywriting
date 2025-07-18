@@ -3,7 +3,7 @@ export default function StudioLogo() {
   return (
     <img
       src="/placeholder.svg"
-      alt="Tinloof Logo"
+      alt="SimplyWriting Logo"
       style={{
         width: "100%",
         height: "100%",

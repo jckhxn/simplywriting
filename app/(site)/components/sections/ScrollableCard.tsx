@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-import { Card } from "@/app/(site)/components/ui/card";
+import { Card } from "@/app/(site)/components/ui/Card";
 import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/app/(site)/components/ui/avatar";
 import ScrollReveal from "../ScrollReveal";

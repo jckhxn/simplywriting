@@ -1,8 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { GenerateIcon } from "@sanity/icons";
-import { MediaEditor } from "@/sanity/plugins/og-img/src/";
 import { mediaAssetSource } from "sanity-plugin-media";
-import brandLayout from "@/sanity/plugins/og-img/src/layouts/brandLayout";
 import { unsplashAssetSource } from "sanity-plugin-asset-source-unsplash";
 export default defineType({
   name: "seo",
@@ -34,16 +31,6 @@ export default defineType({
           // Select from Media
           mediaAssetSource,
           unsplashAssetSource,
-          {
-            // Gewnerate OG Image
-            name: "image",
-            title: "Generate image",
-            icon: GenerateIcon,
-
-            component: (props) => (
-              <MediaEditor {...props} darkMode={true} layouts={[brandLayout]} />
-            ),
-          },
         ],
       },
     },

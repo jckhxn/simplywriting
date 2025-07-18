@@ -6,7 +6,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/app/(site)/components/ui/card";
+} from "@/app/(site)/components/ui/Card";
 import { Button } from "@/app/(site)/components/ui/button";
 import { formatPublishedDate } from "@/lib/utils";
 

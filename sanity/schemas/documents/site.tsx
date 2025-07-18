@@ -1,8 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { MediaEditor } from "@/sanity/plugins/og-img/src/";
 import { mediaAssetSource } from "sanity-plugin-media";
-import brandLayout from "@/sanity/plugins/og-img/src/layouts/brandLayout";
-import { GenerateIcon } from "@sanity/icons";
 
 // Navigation and footer are now singleton objects in this schema
 export default defineType({
@@ -251,16 +248,6 @@ export default defineType({
         sources: [
           // Select from Media
           mediaAssetSource,
-          {
-            // Gewnerate OG Image
-            name: "image",
-            title: "Generate image",
-            icon: GenerateIcon,
-
-            component: (props) => (
-              <MediaEditor {...props} darkMode={true} layouts={[brandLayout]} />
-            ),
-          },
         ],
       },
     }),
